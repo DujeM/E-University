@@ -32,6 +32,10 @@ class ConfigService {
     return mode != 'DEV';
   }
 
+  public getJwtSecret() {
+    return this.getValue('JWT_SECRET');
+  }
+
   public getDataSource(): DataSourceOptions {
     return {
       type: 'postgres',
@@ -40,8 +44,8 @@ class ConfigService {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      migrations: [__dirname + '/../src/migrations/*.ts'],
-      entities: [__dirname + '/../src/entities/**/*.entity.ts'],
+      migrations: [__dirname + '/../migrations/*.{js,ts}'],
+      entities: [__dirname + '/../models/**/entities/*.entity.{js,ts}'],
       migrationsDir: 'src/migrations/*.ts',
     };
   }
@@ -56,7 +60,7 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: [__dirname + '/../src/models/**/entities/*.entity.ts'],
+      entities: [__dirname + '/../models/**/entities/*.entity.{js,ts}'],
       migrationsTableName: 'migration',
 
       migrations: [__dirname + '/../src/migrations/*.ts'],
