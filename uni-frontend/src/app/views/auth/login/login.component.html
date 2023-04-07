@@ -1,0 +1,11 @@
+<form [formGroup]="loginForm">
+    <div class="flex-col">
+        <label for="username">Username</label>
+        <input class="form-input" type="text" name="username" id="username" formControlName="username" autocomplete="off">
+      </div>
+      <div class="flex-col">
+        <label for="password">Password</label>
+        <input class="form-input secret-input" type="text" name="password" id="password" formControlName="password" autocomplete="off">
+      </div>
+      <button (click)="submitForm()" type="submit">Login</button>
+</form>
