@@ -1,0 +1,21 @@
+.#{$c}card { 
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 4px;
+    @include flex-wrap;
+}
+
+.#{$c}card__item { 
+    flex-basis: 33.333%;
+    max-width: 33.333%;
+    @include flex-column;
+    margin-bottom: 20px;
+}
+
+.#{$c}card__item--title-color { 
+    color: $secondary;
+}
+
+.#{$c}card  > span {
+    font-size: 1.6rem;
+}

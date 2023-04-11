@@ -1,0 +1,35 @@
+<div class="u-flex-between">
+    <h1>User details</h1>
+    <div class="u-flex gap-10">
+        <button class="c-button c-button__action c-button--danger" (click)="deleteInProgress = true;">Delete</button>
+        <button class="c-button c-button__action" [routerLink]="['./edit']">Edit</button>
+    </div>
+</div>
+<div class="c-card" *ngIf="user">
+    <div class="c-card__item">
+        <span  class="c-card__item--title-color">First name</span>
+        <span>{{ user.firstName }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Last name</span>
+        <span>{{ user.lastName }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Email</span>
+        <span>{{ user.email }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Username</span>
+        <span>{{ user.username }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Role</span>
+        <span>{{ user.roles[0] }}</span>
+    </div>
+</div>
+
+<ng-container *ngIf="deleteInProgress">
+    <app-modal>
+        <app-delete-modal (confirmDelete)="confirmDelete($event)" class="u-flex-center"></app-delete-modal>
+    </app-modal>
+</ng-container>

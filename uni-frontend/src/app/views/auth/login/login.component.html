@@ -1,11 +1,14 @@
-<form [formGroup]="loginForm">
-    <div class="flex-col">
-        <label for="username">Username</label>
-        <input class="form-input" type="text" name="username" id="username" formControlName="username" autocomplete="off">
+<div class="e-page">
+  <h1>E-University</h1>
+  <form class="u-flex-column gap-15" [formGroup]="loginForm">
+    <div class="u-flex-column">
+        <label class="c-input-label" for="username">Username</label>
+        <input class="c-input" type="text" name="username" id="username" formControlName="username" autocomplete="off">
       </div>
-      <div class="flex-col">
-        <label for="password">Password</label>
-        <input class="form-input secret-input" type="text" name="password" id="password" formControlName="password" autocomplete="off">
+      <div class="u-flex-column">
+        <label class="c-input-label" for="password">Password</label>
+        <input class="c-input" type="password" name="password" id="password" formControlName="password" autocomplete="off">
       </div>
-      <button (click)="submitForm()" type="submit">Login</button>
-</form>
+      <button class="c-button" (click)="submitForm()" type="submit">Login</button>
+  </form>
+</div>

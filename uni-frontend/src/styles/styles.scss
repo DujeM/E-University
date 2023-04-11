@@ -1,0 +1,48 @@
+/*------ 00-Settings - Global and component settings ------*/
+
+@import "00-settings/settings.global";
+@import "00-settings/settings.colors";
+@import "00-settings/settings.fonts"; 
+@import "00-settings/settings.namespace"; 
+
+/*------ 01-Tools - Tools and mixins ------*/
+
+@import "01-tools/tools.mixins";
+@import "01-tools/tools.flex";
+@import "01-tools/tools.spacing";
+
+/*------ 02-Generics - Resets and normalising ------*/
+
+@import "02-generics/generic.normalize";
+@import "02-generics/generic.box-sizing";
+@import "02-generics/generic.reset";
+@import "02-generics/generic.shared";
+
+/*------ 03-Elements - Generic html elements ------*/
+
+@import "03-elements/elements.headings";
+@import "03-elements/elements.body";
+@import "03-elements/elements.page";
+
+/*------ 04-Object - Object html elements ------*/
+
+@import "04-objects/objects.layout";
+@import "04-objects/objects.grid";
+@import "04-objects/objects.media";
+@import "04-objects/objects.wrappers";
+
+/*------ 05-Elements - Components ------*/
+
+@import "05-components/component.card-footer";
+@import "05-components/component.input";
+@import "05-components/component.button";
+@import "05-components/component.sidebar";
+@import "05-components/component.table";
+@import "05-components/component.card";
+@import "05-components/component.modal";
+
+/*------ 06-Trumps - Utilities ------*/
+
+@import "06-utilities/utilities.helpers";
+@import "06-utilities/utilities.flex";
+@import "06-utilities/utilities.spacing";

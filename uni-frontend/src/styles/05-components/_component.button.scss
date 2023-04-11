@@ -1,0 +1,21 @@
+.#{$c}button {
+    background: $primary;
+    border: none;
+    color: $white;
+    padding: 12px;
+    text-transform: uppercase;
+    border-radius: 24px;
+
+    &__action {
+        border-radius: 6px;
+        height: 40px;
+    }
+}
+
+.#{$c}button--danger {
+    background: $danger;
+}
+
+.#{$c}button--secondary {
+    background: $secondary;
+}

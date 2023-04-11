@@ -1,0 +1,10 @@
+.#{$e}page {
+  @include flex-column;
+  @include flex-center;
+  min-height: 100vh;
+}
+  
+.#{$e}page__main-container {
+  padding: 30px;
+  min-height: 100vh;
+}

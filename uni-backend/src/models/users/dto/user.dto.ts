@@ -1,4 +1,4 @@
-import { IsString, IsUUID, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsUUID, IsArray } from 'class-validator';
 import { User } from '../entities/user.entity';
 
 export class UserDto {

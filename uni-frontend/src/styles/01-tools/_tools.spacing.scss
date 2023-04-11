@@ -1,0 +1,18 @@
+@mixin spacing-modifiers-side($type) {
+    @each $space in $spaces {
+      @each $side in $sides {
+        .#{str-slice($type, 0, 1)}-#{str-slice($side, 0, 1)}-#{$space} {
+          #{$type}-#{$side}: #{$space}px;
+        }
+      }
+    }
+  }
+  
+
+@mixin spacing-modifiers($type) {
+    @each $space in $spaces {
+        .#{$type}-#{$space} {
+          #{$type}: #{$space}px;
+        }
+    }
+}

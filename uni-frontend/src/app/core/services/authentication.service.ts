@@ -31,6 +31,7 @@ export class AuthenticationService {
   logout() {
     this.roles = [];
     this.removeTokens();
+    this.router.navigateByUrl('');
   }
 
   getAuthorizationToken(): string | null {

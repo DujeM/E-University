@@ -1,0 +1,8 @@
+<div class="u-flex-column gap-15">
+    <div class="c-table__head u-flex gap-20">
+        <div class="c-table__cell" *ngFor="let header of headers">{{ header }}</div>
+    </div>
+    <div class="u-flex-column gap-10">
+        <ng-content></ng-content>
+    </div>
+</div>

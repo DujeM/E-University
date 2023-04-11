@@ -1,0 +1,15 @@
+.#{$u}flex {
+    @include flex;
+}
+
+.#{$u}flex-column {
+    @include flex-column;
+}
+
+.#{$u}flex-between {
+    @include flex-between;
+}
+
+.#{$u}flex-center {
+    @include flex-center;
+}

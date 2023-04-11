@@ -1,0 +1,32 @@
+.#{$c}table__head {
+    border-radius: 4px;
+    background: $gray;
+}
+
+.#{$c}table__row {
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    &:hover {
+        border: 2px solid #000;
+        background-color: #f2f2f2;
+
+        .#{$c}table__cell {
+            padding: 10px 12px;
+
+            &:first-child {
+                padding-left: 10px
+            }
+
+            &:last-child {
+                padding-right: 10px;
+            }
+        }
+    }
+}
+
+.#{$c}table__cell {
+    width: 180px;
+    padding: 12px;
+}

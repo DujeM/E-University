@@ -1,0 +1,15 @@
+<div class="u-flex-between">
+    <h1>Users</h1>
+    <button class="c-button c-button__action" [routerLink]="['./new']">Add user</button>
+</div>
+<app-table [data]="users" [headers]="tableHeaders">
+    <ng-container *ngFor="let user of users">
+        <div class="c-table__row u-flex gap-20" [routerLink]="['./' + user.id]">
+            <div class="c-table__cell">{{ user.username }}</div>
+            <div class="c-table__cell">{{ user.email }}</div>
+            <div class="c-table__cell">{{ user.firstName }}</div>
+            <div class="c-table__cell">{{ user.lastName }}</div>
+            <div class="c-table__cell">{{ user.roles[0] }}</div>
+        </div>
+    </ng-container>
+</app-table>

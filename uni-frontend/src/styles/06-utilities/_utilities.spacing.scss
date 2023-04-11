@@ -1,0 +1,20 @@
+
+@include spacing-modifiers-side (margin);
+@include spacing-modifiers-side (padding);
+@include spacing-modifiers (gap);
+
+.#{$u}m-l-auto {
+  margin-left: auto;
+}
+
+.#{$u}m-none {
+  margin: 0;
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.#{$u}p-none {
+  padding: 0;
+}

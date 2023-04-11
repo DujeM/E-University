@@ -1,0 +1,10 @@
+<div class="c-modal">
+    <h2>Delete</h2>
+    <div>
+        <p>Are you sure you want to continue, this action is permanent.</p>
+    </div>
+    <div class="u-flex gap-20">
+        <button class="c-button c-button--secondary" (click)="confirmDelete.emit(false)">Cancel</button>
+        <button class="c-button c-button--danger" (click)="confirmDelete.emit(true)">Delete</button>
+    </div>
+</div>

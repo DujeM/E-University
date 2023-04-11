@@ -1,0 +1,33 @@
+// Settings - Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+// Font family
+//--------------------
+$font-family-base: 'Roboto', sans-serif;
+$font-family-secondary: 'Roboto', sans-serif;
+
+// Font sizes
+//--------------------
+// 1rem = 10px
+$font-size-xxs: 1rem;
+$font-size-xs: 1.2rem;
+$font-size-sm: 1.4rem;
+$font-size-normal: 1.6rem;
+$font-size-md: 2.4rem;
+$font-size-lg: 3rem;
+$font-size-xlg: 5rem;
+$font-size-xxlg: 6rem;
+
+// Line heights
+$line-height-xsmall: 1.2rem;
+$line-height-small: 1.6rem;
+$line-height-normal: 1.9rem;
+$line-height-big: 2.2rem;
+
+// Font weights
+//--------------------
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-heavy: 900;
