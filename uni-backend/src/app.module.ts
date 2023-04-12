@@ -6,6 +6,8 @@ import { AuthModule } from './authentication/auth.module';
 import { configService } from './config/config.service';
 import { UsersModule } from './models/users/users.module';
 import { CoursesModule } from './models/courses/courses.module';
+import { StudiesModule } from './models/studies/studies.module';
+import { ClassroomsModule } from './models/classrooms/classrooms.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { CoursesModule } from './models/courses/courses.module';
     UsersModule,
     AuthModule,
     CoursesModule,
+    StudiesModule,
+    ClassroomsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
