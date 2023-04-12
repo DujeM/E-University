@@ -1,26 +1,18 @@
 <div class="u-flex-between">
-    <h1>Course details</h1>
+    <h1>Study details</h1>
     <div class="u-flex gap-10">
         <button class="c-button c-button__action c-button--danger" (click)="deleteInProgress = true;">Delete</button>
         <button class="c-button c-button__action" [routerLink]="['./edit']">Edit</button>
     </div>
 </div>
-<div class="c-card" *ngIf="course">
+<div class="c-card" *ngIf="study">
     <div class="c-card__item">
         <span  class="c-card__item--title-color">Name</span>
-        <span>{{ course.name }}</span>
+        <span>{{ study.name }}</span>
     </div>
     <div class="c-card__item">
         <span class="c-card__item--title-color">Code</span>
-        <span>{{ course.code }}</span>
-    </div>
-    <div class="c-card__item">
-        <span class="c-card__item--title-color">Owner</span>
-        <span>{{ course.owner.firstName }} {{ course.owner.lastName }}</span>
-    </div>
-    <div class="c-card__item">
-        <span class="c-card__item--title-color">Study</span>
-        <span>{{ course.study.name }}</span>
+        <span>{{ study.code }}</span>
     </div>
 </div>
 

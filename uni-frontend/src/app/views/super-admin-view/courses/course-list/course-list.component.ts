@@ -17,7 +17,7 @@ export class CourseListComponent implements OnDestroy {
   ngOnInit() {
     this.coursesService.getAll().pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.courses = res;
-      this.tableHeaders = ['Name', 'Code', 'Owner'];
+      this.tableHeaders = ['Name', 'Code', 'Owner', 'Study'];
     });
   }
 

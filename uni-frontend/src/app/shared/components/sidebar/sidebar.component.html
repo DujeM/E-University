@@ -9,5 +9,13 @@
             <fa-icon [icon]="faBook"></fa-icon>
             <a [routerLink]="['./courses']">Courses</a>
         </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('classrooms') }"> 
+            <fa-icon [icon]="faChalkboard"></fa-icon>
+            <a [routerLink]="['./classrooms']">Classrooms</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('studies') }"> 
+            <fa-icon [icon]="faGraduationCap"></fa-icon>
+            <a [routerLink]="['./studies']">Studies</a>
+        </div>
     </div>
 </div>

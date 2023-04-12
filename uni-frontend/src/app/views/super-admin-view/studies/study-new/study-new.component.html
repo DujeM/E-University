@@ -1,0 +1,12 @@
+<h1>Add study</h1>
+<form class="u-flex-column gap-15" [formGroup]="addStudyForm">
+    <div class="u-flex-column">
+        <label class="c-input-label" for="name">Name</label>
+        <input class="c-input" type="text" name="name" id="name" formControlName="name" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="code">Code</label>
+        <input class="c-input" type="text" name="code" id="code" formControlName="code" autocomplete="off">
+    </div>
+    <button class="c-button" (click)="submit()" type="submit">Create</button>
+  </form>

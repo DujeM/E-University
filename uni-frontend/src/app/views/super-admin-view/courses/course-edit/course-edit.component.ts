@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UsersService } from 'src/app/core/services';
 import { CoursesService } from 'src/app/core/services/courses.service';
+import { StudiesService } from 'src/app/core/services/studies.service';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { Course } from 'src/app/shared/models/course.model';
+import { Study } from 'src/app/shared/models/study.model';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -21,12 +23,15 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   name!: FormControl;
   code!: FormControl;
   owner!: FormControl;
+  study!: FormControl;
   admins: User[] = [];
+  studies: Study[] = [];
 
   constructor(
     private route: ActivatedRoute, 
     private coursesService: CoursesService,
     private usersService: UsersService, 
+    private studiesService: StudiesService,
     private router: Router, 
     private fb: FormBuilder) {
     if (route.snapshot.params['id']) {
@@ -40,6 +45,13 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       .subscribe(users => {
         this.admins = users.filter(u => u.roles.includes(Role.ADMIN));
       })
+
+    this.studiesService.getAll()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(studies => {
+        console.log(studies)
+        this.studies = studies;
+      })
   }
 
   ngOnDestroy() {
@@ -51,11 +63,13 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.name = new FormControl(this.course.name, [Validators.required]);
     this.code = new FormControl(this.course.code, [Validators.required]);
     this.owner = new FormControl(this.course.owner.id, [Validators.required]);
+    this.study = new FormControl(this.course.study ? this.course.study.id : null, [Validators.required]);
 
     this.editCourseForm = this.fb.group({
       name: this.name,
       code: this.code,
-      owner: this.owner
+      owner: this.owner,
+      study: this.study
     });
   }
 

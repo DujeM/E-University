@@ -16,5 +16,13 @@
             </option>
         </select>
     </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="study">Study</label>
+        <select class="c-input" formControlName="study">
+            <option *ngFor="let study of studies" [ngValue]="study">
+              {{ study.name }}
+            </option>
+        </select>
+    </div>
     <button class="c-button" (click)="submit()" type="submit">Create</button>
   </form>

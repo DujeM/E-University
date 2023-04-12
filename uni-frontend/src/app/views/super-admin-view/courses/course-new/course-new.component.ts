@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UsersService } from 'src/app/core/services';
 import { CoursesService } from 'src/app/core/services/courses.service';
+import { StudiesService } from 'src/app/core/services/studies.service';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { Course } from 'src/app/shared/models/course.model';
+import { Study } from 'src/app/shared/models/study.model';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -20,13 +22,16 @@ export class CourseNewComponent implements OnInit, OnDestroy {
   name!: FormControl;
   code!: FormControl;
   owner!: FormControl;
+  study!: FormControl;
   admins: User[] = [];
+  studies: Study[] = [];
 
   constructor(
     private fb: FormBuilder, 
     private coursesService: CoursesService, 
     private router: Router,
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private studiesService: StudiesService) {
     this.initForm();
   }
 
@@ -35,6 +40,12 @@ export class CourseNewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(users => {
         this.admins = users.filter(u => u.roles.includes(Role.ADMIN));
+      })
+
+    this.studiesService.getAll()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(studies => {
+        this.studies = studies;
       })
   }
 
@@ -47,11 +58,13 @@ export class CourseNewComponent implements OnInit, OnDestroy {
     this.name = new FormControl('', [Validators.required]);
     this.code = new FormControl('', [Validators.required]);
     this.owner = new FormControl(null, [Validators.required]);
+    this.study = new FormControl(null, [Validators.required]);
 
     this.addCourseForm = this.fb.group({
       name: this.name,
       code: this.code,
-      owner: this.owner
+      owner: this.owner,
+      study: this.study
     });
   }
 

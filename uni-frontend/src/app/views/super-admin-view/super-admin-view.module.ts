@@ -15,6 +15,16 @@ import { CourseListComponent } from './courses/course-list/course-list.component
 import { CourseNewComponent } from './courses/course-new/course-new.component';
 import { CourseEditComponent } from './courses/course-edit/course-edit.component';
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
+import { StudiesComponent } from './studies/studies.component';
+import { StudyNewComponent } from './studies/study-new/study-new.component';
+import { StudyEditComponent } from './studies/study-edit/study-edit.component';
+import { StudyDetailsComponent } from './studies/study-details/study-details.component';
+import { ClassroomsComponent } from './classrooms/classrooms.component';
+import { ClassroomNewComponent } from './classrooms/classroom-new/classroom-new.component';
+import { ClassroomEditComponent } from './classrooms/classroom-edit/classroom-edit.component';
+import { ClassroomDetailsComponent } from './classrooms/classroom-details/classroom-details.component';
+import { ClassroomListComponent } from './classrooms/classroom-list/classroom-list.component';
+import { StudyListComponent } from './studies/study-list/study-list.component';
 
 
 @NgModule({
@@ -29,7 +39,17 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
     CourseListComponent,
     CourseNewComponent,
     CourseEditComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    StudiesComponent,
+    StudyNewComponent,
+    StudyEditComponent,
+    StudyDetailsComponent,
+    ClassroomsComponent,
+    ClassroomNewComponent,
+    ClassroomEditComponent,
+    ClassroomDetailsComponent,
+    ClassroomListComponent,
+    StudyListComponent
   ],
   imports: [
     CommonModule,
