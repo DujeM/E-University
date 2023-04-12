@@ -1,4 +1,4 @@
-.#{$c}sidebar{
+.#{$c}sidebar {
     @include flex-column;
     position: fixed;
     top: 0;
@@ -6,14 +6,19 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     height: 100%;
-    background-color: $gray;
+    background-color: $black;
     border-right: 1px solid $black;
     z-index: 999;
     width: 240px;
     padding: 16px;
 }
 
+.#{$c}sidebar > h1, .#{$c}sidebar a {
+    color: $white;
+}
+
 .#{$c}sidebar__link {
+    color: $white;
     border-bottom: 1px solid $black;
     padding: 5px;
 

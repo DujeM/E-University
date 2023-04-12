@@ -1,0 +1,27 @@
+<div class="u-flex-between">
+    <h1>Course details</h1>
+    <div class="u-flex gap-10">
+        <button class="c-button c-button__action c-button--danger" (click)="deleteInProgress = true;">Delete</button>
+        <button class="c-button c-button__action" [routerLink]="['./edit']">Edit</button>
+    </div>
+</div>
+<div class="c-card" *ngIf="course">
+    <div class="c-card__item">
+        <span  class="c-card__item--title-color">Name</span>
+        <span>{{ course.name }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Code</span>
+        <span>{{ course.code }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Owner</span>
+        <span>{{ course.owner.firstName }} {{ course.owner.lastName }}</span>
+    </div>
+</div>
+
+<ng-container *ngIf="deleteInProgress">
+    <app-modal>
+        <app-delete-modal (confirmDelete)="confirmDelete($event)" class="u-flex-center"></app-delete-modal>
+    </app-modal>
+</ng-container>

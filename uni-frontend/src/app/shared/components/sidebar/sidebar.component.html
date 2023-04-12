@@ -1,10 +1,13 @@
 <div class="c-sidebar gap-15">
     <h1>E-University</h1>
     <div class="u-flex-column gap-10">
-        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('/users') }"> 
-            <i class="fa-solid fa-users"></i>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('./users') }"> 
             <fa-icon [icon]="faUsers"></fa-icon>
             <a [routerLink]="['./users']">Users</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('courses') }"> 
+            <fa-icon [icon]="faBook"></fa-icon>
+            <a [routerLink]="['./courses']">Courses</a>
         </div>
     </div>
 </div>

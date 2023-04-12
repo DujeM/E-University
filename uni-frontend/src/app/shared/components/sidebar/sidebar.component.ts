@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,5 +9,6 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 })
 export class SidebarComponent {
   faUsers = faUsers;
+  faBook = faBook;
   constructor(public router: Router) {}
 }

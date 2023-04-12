@@ -10,6 +10,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseListComponent } from './courses/course-list/course-list.component';
+import { CourseNewComponent } from './courses/course-new/course-new.component';
+import { CourseEditComponent } from './courses/course-edit/course-edit.component';
+import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 
 
 @NgModule({
@@ -19,7 +24,12 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     UserNewComponent,
     UserListComponent,
     UserDetailsComponent,
-    UserEditComponent
+    UserEditComponent,
+    CoursesComponent,
+    CourseListComponent,
+    CourseNewComponent,
+    CourseEditComponent,
+    CourseDetailsComponent
   ],
   imports: [
     CommonModule,

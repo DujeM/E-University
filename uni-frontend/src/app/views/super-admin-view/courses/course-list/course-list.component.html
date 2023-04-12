@@ -1,0 +1,13 @@
+<div class="u-flex-between">
+    <h1>Courses</h1>
+    <button class="c-button c-button__action" [routerLink]="['./new']">Add course</button>
+</div>
+<app-table [data]="courses" [headers]="tableHeaders">
+    <ng-container *ngFor="let course of courses">
+        <div class="c-table__row u-flex gap-20" [routerLink]="['./' + course.id]">
+            <div class="c-table__cell">{{ course.name }}</div>
+            <div class="c-table__cell">{{ course.code }}</div>
+            <div class="c-table__cell">{{ course.owner.firstName }} {{ course.owner.lastName}}</div>
+        </div>
+    </ng-container>
+</app-table>
