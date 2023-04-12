@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -11,8 +11,8 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
-export class UserEditComponent {
-  private ngUnsubscribe = new Subject();
+export class UserEditComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
   user!: User;
 
   editUserForm!: FormGroup;
@@ -31,6 +31,11 @@ export class UserEditComponent {
     if (route.snapshot.params['id']) {
       this.getUserDetails(route.snapshot.params['id']);
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   private initForm() {

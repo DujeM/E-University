@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { CoursesService } from 'src/app/core/services/courses.service';
@@ -9,8 +9,8 @@ import { Course } from 'src/app/shared/models/course.model';
   templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.scss']
 })
-export class CourseDetailsComponent {
-  private ngUnsubscribe = new Subject();
+export class CourseDetailsComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
   course!: Course;
   deleteInProgress = false;
 
@@ -18,6 +18,11 @@ export class CourseDetailsComponent {
     if (route.snapshot.params['id']) {
       this.getUserDetails(route.snapshot.params['id']);
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   getUserDetails(id: string) {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { Course } from 'src/app/shared/models/course.model';
@@ -8,8 +8,8 @@ import { Course } from 'src/app/shared/models/course.model';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss']
 })
-export class CourseListComponent {
-  private ngUnsubscribe = new Subject();
+export class CourseListComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
   courses: Course[] = [];
   tableHeaders: string[] = [];
   constructor(private coursesService: CoursesService) {}
@@ -19,5 +19,10 @@ export class CourseListComponent {
       this.courses = res;
       this.tableHeaders = ['Name', 'Code', 'Owner'];
     });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UsersService } from 'src/app/core/services';
@@ -9,8 +9,8 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
-  private ngUnsubscribe = new Subject();
+export class UserDetailsComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
   user!: User;
   deleteInProgress = false;
 
@@ -20,8 +20,9 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   getUserDetails(id: string) {

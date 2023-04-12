@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/services';
@@ -9,8 +9,8 @@ import { TokenResponse } from 'src/app/shared/models/auth.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  private ngUnsubscribe = new Subject();
+export class LoginComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
 
   loginForm!: FormGroup;
   username!: FormControl;
@@ -22,6 +22,11 @@ export class LoginComponent {
     private authService: AuthenticationService
   ) {
     this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   private initForm() {

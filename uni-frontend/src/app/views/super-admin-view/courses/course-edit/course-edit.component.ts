@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,8 +13,8 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './course-edit.component.html',
   styleUrls: ['./course-edit.component.scss']
 })
-export class CourseEditComponent implements OnInit {
-  private ngUnsubscribe = new Subject();
+export class CourseEditComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
   course!: Course;
 
   editCourseForm!: FormGroup;
@@ -40,6 +40,11 @@ export class CourseEditComponent implements OnInit {
       .subscribe(users => {
         this.admins = users.filter(u => u.roles.includes(Role.ADMIN));
       })
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   private initForm() {

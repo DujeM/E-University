@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -11,8 +11,8 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './user-new.component.html',
   styleUrls: ['./user-new.component.scss']
 })
-export class UserNewComponent {
-  private ngUnsubscribe = new Subject();
+export class UserNewComponent implements OnDestroy {
+  private ngUnsubscribe = new Subject<void>();
 
   addUserForm!: FormGroup;
   firstName!: FormControl;
@@ -25,6 +25,11 @@ export class UserNewComponent {
 
   constructor(private fb: FormBuilder, private usersService: UsersService, private router: Router) {
     this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   private initForm() {
