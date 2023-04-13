@@ -19,13 +19,13 @@ export class CoursesService {
 
   async findAll(): Promise<CourseDto[]> {
     return await this.repository
-      .find({ relations: ['owner'] })
+      .find({ relations: ['owner', 'study'] })
       .then((courses) => courses.map((e) => CourseDto.fromEntity(e)));
   }
 
   async findOne(id: string): Promise<CourseDto> {
     return await this.repository
-      .find({ where: { id }, relations: ['owner'] })
+      .find({ where: { id }, relations: ['owner', 'study'] })
       .then((course) => CourseDto.fromEntity(course[0]));
   }
 

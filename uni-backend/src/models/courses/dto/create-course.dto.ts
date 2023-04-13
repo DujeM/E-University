@@ -1,6 +1,7 @@
 import { IsString, IsUUID } from 'class-validator';
 import { User } from 'src/models/users/entities/user.entity';
 import { Course } from '../entities/course.entity';
+import { Study } from 'src/models/studies/entities/study.entity';
 
 export class CourseDto {
   @IsUUID()
@@ -14,12 +15,15 @@ export class CourseDto {
 
   owner: User;
 
+  study: Study;
+
   public static from(dto: Partial<CourseDto>) {
     const c = new CourseDto();
     c.id = dto.id;
     c.name = dto.name;
     c.code = dto.code;
     c.owner = dto.owner;
+    c.study = dto.study;
     return c;
   }
 
@@ -29,6 +33,7 @@ export class CourseDto {
       name: entity.name,
       code: entity.code,
       owner: entity.owner,
+      study: entity.study,
     });
   }
 
@@ -38,6 +43,7 @@ export class CourseDto {
     c.name = this.name;
     c.code = this.code;
     c.owner = this.owner;
+    c.study = this.study;
     c.createDateTime = new Date();
     return c;
   }
