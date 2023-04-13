@@ -1,7 +1,7 @@
 import { BaseEntity } from 'src/models/base.entity';
 import { Study } from 'src/models/studies/entities/study.entity';
 import { User } from 'src/models/users/entities/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Course extends BaseEntity {
@@ -16,4 +16,10 @@ export class Course extends BaseEntity {
 
   @ManyToOne(() => Study, (study: Study) => study.courses)
   study: Study;
+
+  @ManyToMany(() => User, (user) => user.enrolledCourses, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  })
+  students?: User[];
 }

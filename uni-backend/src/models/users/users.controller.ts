@@ -46,4 +46,16 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
+  @Post('/enroll')
+  async enrollCourse(
+    @Body() createUserCourse: { userId: string; courseId: string },
+  ) {
+    await this.usersService.enrollCourse(createUserCourse);
+  }
+
+  @Get('/courses/:id')
+  async getCourses(@Param('id') id: string) {
+    return await this.usersService.getCourses(id);
+  }
 }
