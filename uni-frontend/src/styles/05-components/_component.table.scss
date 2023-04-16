@@ -13,14 +13,14 @@
         background-color: #f2f2f2;
 
         .#{$c}table__cell {
-            padding: 10px 12px;
+            padding: 12px 14px;
 
             &:first-child {
-                padding-left: 10px
+                padding-left: 12px
             }
 
             &:last-child {
-                padding-right: 10px;
+                padding-right: 12px;
             }
         }
     }
@@ -28,5 +28,5 @@
 
 .#{$c}table__cell {
     width: 180px;
-    padding: 12px;
+    padding: 14px;
 }

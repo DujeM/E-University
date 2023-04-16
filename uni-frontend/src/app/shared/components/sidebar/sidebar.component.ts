@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faBook, faChalkboard, faGraduationCap, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faCalendarDays, faChalkboard, faGraduationCap, faRightFromBracket, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { AuthenticationService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,10 +9,17 @@ import { faBook, faChalkboard, faGraduationCap, faUsers } from '@fortawesome/fre
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  isSuperAdmin = false;
   faUsers = faUsers;
+  faUser = faUser;
   faBook = faBook;
+  faCalendar = faCalendarDays;
   faChalkboard = faChalkboard;
   faGraduationCap = faGraduationCap;
+  faLogout = faRightFromBracket;
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, public authService: AuthenticationService) {
+    this.isSuperAdmin = authService.isSuperAdmin();
+    console.log(this.isSuperAdmin)
+  }
 }

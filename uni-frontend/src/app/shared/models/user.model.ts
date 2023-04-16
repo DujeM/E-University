@@ -1,4 +1,5 @@
 import { Role } from "../enums/role.enum";
+import { Course } from "./course.model";
 
 export interface User {
     id: string;
@@ -17,4 +18,11 @@ export interface NewUser {
     username: string;
     password: string;
     roles: Role[];
+}
+
+export interface UserCourse {
+    userId: string;
+    courseId: string;
+    users: User;
+    courses: Course;
 }

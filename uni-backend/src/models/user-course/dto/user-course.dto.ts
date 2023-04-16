@@ -10,9 +10,9 @@ export class UserCourseDto {
   @IsString()
   courseId: string;
 
-  users: User[];
+  users: User;
 
-  courses: Course[];
+  courses: Course;
 
   public static from(dto: Partial<UserCourseDto>) {
     const c = new UserCourseDto();

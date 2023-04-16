@@ -12,6 +12,7 @@ const TOKEN = 'TOKEN';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  id: string = '';
   roles: Role[] = [];
 
   constructor(private httpClient: HttpClient, private router: Router) { }
@@ -46,6 +47,11 @@ export class AuthenticationService {
     this.decodeToken(this.getAuthorizationToken());
   }
 
+  isSuperAdmin() {
+    this.getCurrentRoles();
+    return this.roles.includes(Role.SUPER_ADMIN);
+  }
+
   private storeTokens(accessToken: string) {
     localStorage.setItem(TOKEN, accessToken);
   }
@@ -54,11 +60,12 @@ export class AuthenticationService {
     if (!token) {
       return this.router.navigateByUrl('');
     }
-
     const jwtHelper = new JwtHelperService();
     const decodedToken = jwtHelper.decodeToken(token);
+    console.log(decodedToken)
 
     this.roles = decodedToken.roles;
+    this.id = decodedToken.id;
     return this.router.navigateByUrl('');
   }
 

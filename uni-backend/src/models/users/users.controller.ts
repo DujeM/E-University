@@ -58,4 +58,11 @@ export class UsersController {
   async getCourses(@Param('id') id: string) {
     return await this.usersService.getCourses(id);
   }
+
+  @Post('/courses/remove')
+  async removeCourse(
+    @Body() removeUserCourse: { userId: string; courseId: string },
+  ) {
+    await this.usersService.removeCourse(removeUserCourse);
+  }
 }

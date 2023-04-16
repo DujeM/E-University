@@ -1,0 +1,15 @@
+<div class="u-flex-between">
+    <h1>Courses</h1>
+</div>
+<app-table [data]="courses" [headers]="tableHeaders">
+    <ng-container *ngFor="let course of courses">
+        <div class="c-table__row u-flex gap-20">
+            <div class="c-table__cell">{{ course.name }}</div>
+            <div class="c-table__cell">{{ course.code }}</div>
+            <button class="c-button c-button__action c-button--absolute" *ngIf="!this.checkIfAlreadyEnrolled(course.id); else remove;" (click)="courseEnroll(course.id)">Enroll</button>
+            <ng-template #remove>
+                <button class="c-button c-button__action c-button--danger c-button--absolute" (click)="removeEnrolledCourse(course.id)">Remove</button>
+            </ng-template>
+        </div>
+    </ng-container>
+</app-table>

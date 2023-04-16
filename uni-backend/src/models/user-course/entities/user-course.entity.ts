@@ -15,12 +15,12 @@ export class UserCourse {
     onUpdate: 'NO ACTION',
   })
   @JoinColumn([{ name: 'userId', referencedColumnName: 'id' }])
-  users: User[];
+  users: User;
 
   @ManyToOne(() => Course, (course) => course.students, {
     onDelete: 'NO ACTION',
     onUpdate: 'NO ACTION',
   })
   @JoinColumn([{ name: 'courseId', referencedColumnName: 'id' }])
-  courses: Course[];
+  courses: Course;
 }

@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Course } from '../courses/entities/course.entity';
 import { UserCourseDto } from '../user-course/dto/user-course.dto';
 import { UserCourse } from '../user-course/entities/user-course.entity';
 import { UserDto } from './dto/user.dto';
@@ -29,8 +30,11 @@ export class UsersService {
 
   async findOne(id: string): Promise<UserDto> {
     return await this.repository
-      .findOneBy({ id })
-      .then((user) => UserDto.fromEntity(user));
+      .find({
+        where: { id },
+        relations: ['enrolledCourses'],
+      })
+      .then((user) => UserDto.fromEntity(user[0]));
   }
 
   async findOneByUsername(username: string): Promise<UserDto> {
@@ -61,7 +65,7 @@ export class UsersService {
     await this.userCourseRepository.save(createUserCourse);
   }
 
-  async getCourses(userId: string): Promise<UserCourseDto[]> {
+  async getCourses(userId: string): Promise<Course[]> {
     const student = await this.findOne(userId);
 
     if (!student) {
@@ -73,8 +77,22 @@ export class UsersService {
         where: { userId },
         relations: ['users', 'courses'],
       })
-      .then((userCourses) =>
-        userCourses.map((uc) => UserCourseDto.fromEntity(uc)),
-      );
+      .then((userCourses) => userCourses.map((uc) => uc.courses));
+  }
+
+  async removeCourse(removeUserCourse: {
+    userId: string;
+    courseId: string;
+  }): Promise<void> {
+    const student = await this.findOne(removeUserCourse.userId);
+
+    if (!student) {
+      throw new NotFoundException();
+    }
+
+    student.enrolledCourses = student.enrolledCourses.filter(
+      (c) => c.id !== removeUserCourse.courseId,
+    );
+    await this.repository.save(student);
   }
 }

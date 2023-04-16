@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 import { Role } from 'src/app/shared/enums/role.enum';
 import { AuthenticationService } from '../services';
 
-export const redirectGuard: CanActivateFn = (
+export const userAdminGuard: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) => {
@@ -15,12 +15,9 @@ export const redirectGuard: CanActivateFn = (
         return false;
     }
 
-    authService.getCurrentRoles();
-
-    if (authService.roles.includes(Role.SUPER_ADMIN)) {
-        router.navigateByUrl('super-admin-view');
-    } else {
-        router.navigateByUrl('portal');
+    if (!authService.roles.includes(Role.ADMIN) && !authService.roles.includes(Role.USER)) {
+        router.navigateByUrl('');
+        return false;
     }
     
     return true;

@@ -1,21 +1,43 @@
 <div class="c-sidebar gap-15">
     <h1>E-University</h1>
-    <div class="u-flex-column gap-10">
+    <div class="u-flex-column gap-10" *ngIf="isSuperAdmin">
         <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('./users') }"> 
             <fa-icon [icon]="faUsers"></fa-icon>
-            <a [routerLink]="['./users']">Users</a>
+            <a [routerLink]="['./super-admin-view/users']">Users</a>
         </div>
         <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('courses') }"> 
             <fa-icon [icon]="faBook"></fa-icon>
-            <a [routerLink]="['./courses']">Courses</a>
+            <a [routerLink]="['./super-admin-view/courses']">Courses</a>
         </div>
         <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('classrooms') }"> 
             <fa-icon [icon]="faChalkboard"></fa-icon>
-            <a [routerLink]="['./classrooms']">Classrooms</a>
+            <a [routerLink]="['./super-admin-view/classrooms']">Classrooms</a>
         </div>
         <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('studies') }"> 
             <fa-icon [icon]="faGraduationCap"></fa-icon>
-            <a [routerLink]="['./studies']">Studies</a>
+            <a [routerLink]="['./super-admin-view/studies']">Studies</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8"> 
+            <fa-icon [icon]="faLogout"></fa-icon>
+            <a [routerLink]="['']" (click)="authService.logout()">Logout</a>
+        </div>
+    </div>
+    <div class="u-flex-column gap-10" *ngIf="!isSuperAdmin">
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('courses') }"> 
+            <fa-icon [icon]="faBook"></fa-icon>
+            <a [routerLink]="['./portal/courses']">Courses</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('courses') }"> 
+            <fa-icon [icon]="faCalendar"></fa-icon>
+            <a [routerLink]="['./portal/scheduel']">Scheduel</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('./users') }"> 
+            <fa-icon [icon]="faUser"></fa-icon>
+            <a [routerLink]="['./portal/users']">Profile</a>
+        </div>
+        <div class="c-sidebar__link u-flex gap-8"> 
+            <fa-icon [icon]="faLogout"></fa-icon>
+            <a [routerLink]="['']" (click)="authService.logout()">Logout</a>
         </div>
     </div>
 </div>

@@ -29,7 +29,7 @@ export class User extends BaseEntity {
     @ManyToMany(
         () => Course, 
         course => course.students,
-        {onDelete: 'NO ACTION', onUpdate: 'NO ACTION'})
+        {onDelete: 'CASCADE', onUpdate: 'NO ACTION'})
         @JoinTable({
           name: 'user_course',
           joinColumn: {

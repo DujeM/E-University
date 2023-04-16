@@ -1,4 +1,5 @@
 import { IsString, IsUUID, IsArray } from 'class-validator';
+import { Course } from 'src/models/courses/entities/course.entity';
 import { User } from '../entities/user.entity';
 
 export class UserDto {
@@ -23,6 +24,10 @@ export class UserDto {
   @IsArray()
   roles: string[];
 
+  courses?: Course[];
+
+  enrolledCourses?: Course[];
+
   public static from(dto: Partial<UserDto>) {
     const u = new UserDto();
     u.id = dto.id;
@@ -32,6 +37,7 @@ export class UserDto {
     u.firstName = dto.firstName;
     u.lastName = dto.lastName;
     u.roles = dto.roles;
+    u.enrolledCourses = dto.enrolledCourses;
     return u;
   }
 
@@ -44,6 +50,8 @@ export class UserDto {
       firstName: entity.firstName,
       lastName: entity.lastName,
       roles: entity.roles,
+      courses: entity.courses,
+      enrolledCourses: entity.enrolledCourses,
     });
   }
 

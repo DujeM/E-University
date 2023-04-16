@@ -7,7 +7,8 @@
     border-radius: 24px;
 
     &__action {
-        border-radius: 6px;
+        border-radius: 4px;
+        min-width: 90px;
         height: 40px;
     }
 }
@@ -18,4 +19,9 @@
 
 .#{$c}button--secondary {
     background: $secondary;
+}
+
+.#{$c}button--absolute {
+    position: absolute;
+    right: 31px;
 }
