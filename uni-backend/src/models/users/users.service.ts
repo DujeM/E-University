@@ -32,7 +32,7 @@ export class UsersService {
     return await this.repository
       .find({
         where: { id },
-        relations: ['enrolledCourses'],
+        relations: ['enrolledCourses', 'courses'],
       })
       .then((user) => UserDto.fromEntity(user[0]));
   }

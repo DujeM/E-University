@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService, UsersService } from 'src/app/core/services';
+import { Role } from 'src/app/shared/enums/role.enum';
 import { Course } from 'src/app/shared/models/course.model';
 
 @Component({
@@ -16,9 +17,15 @@ export class CourseListComponent {
   constructor(private usersService: UsersService, private authService: AuthenticationService) {}
 
   ngOnInit() {
-      this.usersService.getAllEntrolledCourses(this.authService.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-          this.courses = res;
-          this.tableHeaders = ['Name', 'Code'];
+      this.usersService.get(this.authService.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+        this.tableHeaders = ['Name', 'Code'];
+
+        if (res.roles.includes(Role.ADMIN)) {
+          this.courses = res.courses;
+          return;
+        }
+        
+        this.courses = res.enrolledCourses;
       });
   }
 

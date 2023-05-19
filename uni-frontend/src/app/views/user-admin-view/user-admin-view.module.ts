@@ -10,6 +10,9 @@ import { CourseListComponent } from './courses/course-list/course-list.component
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 import { CourseEditComponent } from './courses/course-edit/course-edit.component';
 import { CourseNewComponent } from './courses/course-new/course-new.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileDetailsComponent } from './profile/profile-details/profile-details.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { CourseNewComponent } from './courses/course-new/course-new.component';
     CourseListComponent,
     CourseDetailsComponent,
     CourseEditComponent,
-    CourseNewComponent
+    CourseNewComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    ProfileDetailsComponent
   ],
   imports: [
     CommonModule,

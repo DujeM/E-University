@@ -1,0 +1,20 @@
+<h1>Edit profile</h1>
+<form *ngIf="user" class="u-flex-column gap-15" [formGroup]="editUserForm">
+    <div class="u-flex-column">
+        <label class="c-input-label" for="firstName">First name</label>
+        <input class="c-input" type="text" name="firstName" id="firstName" formControlName="firstName" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="lastName">Last name</label>
+        <input class="c-input" type="text" name="lastName" id="lastName" formControlName="lastName" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="email">Email</label>
+        <input class="c-input" type="email" name="email" id="email" formControlName="email" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="username">Username</label>
+        <input class="c-input" type="text" name="username" id="username" formControlName="username" autocomplete="off">
+    </div>
+    <button class="c-button" (click)="submit()" type="submit">Update</button>
+  </form>

@@ -9,6 +9,8 @@ export interface User {
     username: string;
     password: string;
     roles: Role[];
+    courses: Course[];
+    enrolledCourses: Course[];
 }
 
 export interface NewUser {

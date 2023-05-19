@@ -37,6 +37,7 @@ export class UserDto {
     u.firstName = dto.firstName;
     u.lastName = dto.lastName;
     u.roles = dto.roles;
+    u.courses = dto.courses;
     u.enrolledCourses = dto.enrolledCourses;
     return u;
   }
