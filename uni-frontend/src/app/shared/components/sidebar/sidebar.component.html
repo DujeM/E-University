@@ -13,6 +13,10 @@
             <fa-icon [icon]="faChalkboard"></fa-icon>
             <a [routerLink]="['./super-admin-view/classrooms']">Classrooms</a>
         </div>
+        <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('periods') }"> 
+            <fa-icon [icon]="faClock"></fa-icon>
+            <a [routerLink]="['./super-admin-view/periods']">Periods</a>
+        </div>
         <div class="c-sidebar__link u-flex gap-8" [ngClass]="{ 'c-sidebar__link--active': router.url.includes('studies') }"> 
             <fa-icon [icon]="faGraduationCap"></fa-icon>
             <a [routerLink]="['./super-admin-view/studies']">Studies</a>

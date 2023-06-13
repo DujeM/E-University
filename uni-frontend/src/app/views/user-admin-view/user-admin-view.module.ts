@@ -13,6 +13,12 @@ import { CourseNewComponent } from './courses/course-new/course-new.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileDetailsComponent } from './profile/profile-details/profile-details.component';
+import { ScheduelComponent } from './scheduel/scheduel.component';
+import { ScheduelListComponent } from './scheduel/scheduel-list/scheduel-list.component';
+import { ScheduelNewComponent } from './scheduel/scheduel-new/scheduel-new.component';
+import { ScheduelEditComponent } from './scheduel/scheduel-edit/scheduel-edit.component';
+import { ScheduelDetailsComponent } from './scheduel/scheduel-details/scheduel-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -25,13 +31,19 @@ import { ProfileDetailsComponent } from './profile/profile-details/profile-detai
     CourseNewComponent,
     ProfileComponent,
     ProfileEditComponent,
-    ProfileDetailsComponent
+    ProfileDetailsComponent,
+    ScheduelComponent,
+    ScheduelListComponent,
+    ScheduelNewComponent,
+    ScheduelEditComponent,
+    ScheduelDetailsComponent
   ],
   imports: [
     CommonModule,
     UserAdminViewRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FontAwesomeModule
   ]
 })
 export class UserAdminViewModule { }

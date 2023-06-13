@@ -1,26 +1,26 @@
 <h1>Add user</h1>
-<form class="u-flex-column gap-15" [formGroup]="addUserForm">
-    <div class="u-flex-column">
+<form class="u-flex-wrap gap-15" [formGroup]="addUserForm">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="firstName">First name</label>
         <input class="c-input" type="text" name="firstName" id="firstName" formControlName="firstName" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="lastName">Last name</label>
         <input class="c-input" type="text" name="lastName" id="lastName" formControlName="lastName" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="email">Email</label>
         <input class="c-input" type="email" name="email" id="email" formControlName="email" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="username">Username</label>
         <input class="c-input" type="text" name="username" id="username" formControlName="username" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="password">Password</label>
         <input class="c-input" type="text" name="password" id="password" formControlName="password" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="roles">Role</label>
         <select class="c-input" formControlName="roles">
             <option *ngFor="let role of rolesValues" [ngValue]="role">
@@ -28,5 +28,7 @@
             </option>
         </select>
     </div>
-    <button class="c-button" (click)="submit()" type="submit">Create</button>
+    <div class="u-flex-center">
+        <button class="c-button c-button__action" (click)="submit()" type="submit">Create</button>
+    </div>
   </form>

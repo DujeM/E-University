@@ -1,3 +1,17 @@
 .#{$u}full-width {
     width: 100%;
 }
+
+.#{$u}full-height {
+    height: 100%;
+}
+
+.#{$u}half-width {
+    width: 49%
+}
+
+@media only screen and (max-width: 768px) {
+    .#{$u}half-width {
+        width: 100%;
+    }
+}

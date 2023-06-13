@@ -1,0 +1,27 @@
+<div class="u-flex-between">
+    <h1>Period details</h1>
+    <div class="u-flex gap-10">
+        <button class="c-button c-button__action c-button--danger" (click)="deleteInProgress = true;">Delete</button>
+        <button class="c-button c-button__action" [routerLink]="['./edit']">Edit</button>
+    </div>
+</div>
+<div class="c-card" *ngIf="period">
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Order</span>
+        <span>{{ period.order }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Start</span>
+        <span>{{ period.start }}</span>
+    </div>
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">End</span>
+        <span>{{ period.end }}</span>
+    </div>
+</div>
+
+<ng-container *ngIf="deleteInProgress">
+    <app-modal>
+        <app-delete-modal (confirmDelete)="confirmDelete($event)" class="u-flex-center"></app-delete-modal>
+    </app-modal>
+</ng-container>

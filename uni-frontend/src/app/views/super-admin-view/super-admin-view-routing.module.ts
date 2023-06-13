@@ -21,6 +21,11 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserNewComponent } from './users/user-new/user-new.component';
 import { UsersComponent } from './users/users.component';
+import { PeriodsComponent } from './periods/periods.component';
+import { PeriodListComponent } from './periods/period-list/period-list.component';
+import { PeriodNewComponent } from './periods/period-new/period-new.component';
+import { PeriodDetailsComponent } from './periods/period-details/period-details.component';
+import { PeriodEditComponent } from './periods/period-edit/period-edit.component';
 
 const routes: Routes = [
     {
@@ -65,6 +70,16 @@ const routes: Routes = [
                     { path: 'new', component: ClassroomNewComponent },
                     { path: ':id', component: ClassroomDetailsComponent },
                     { path: ':id/edit', component: ClassroomEditComponent }
+                ]
+            },
+            { 
+                path: 'periods', 
+                component: PeriodsComponent,
+                children: [
+                    { path: '', component: PeriodListComponent },
+                    { path: 'new', component: PeriodNewComponent },
+                    { path: ':id', component: PeriodDetailsComponent },
+                    { path: ':id/edit', component: PeriodEditComponent }
                 ]
             }
         ]

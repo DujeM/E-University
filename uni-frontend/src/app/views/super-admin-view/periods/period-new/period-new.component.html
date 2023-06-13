@@ -1,0 +1,18 @@
+<h1>Add period</h1>
+<form class="u-flex-wrap gap-15" [formGroup]="addPeriodForm">
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="order">Order</label>
+        <input class="c-input" type="text" name="order" id="order" formControlName="order" autocomplete="off">
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="start">Start</label>
+        <input class="c-input" type="time" name="start" id="start" formControlName="start" autocomplete="off">
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="end">End</label>
+        <input class="c-input" type="time" name="end" id="end" formControlName="end" autocomplete="off">
+    </div>
+    <div class="u-flex-center">
+        <button class="c-button c-button__action" (click)="submit()" type="submit">Create</button>
+    </div>
+  </form>

@@ -8,6 +8,8 @@ import { UsersModule } from './models/users/users.module';
 import { CoursesModule } from './models/courses/courses.module';
 import { StudiesModule } from './models/studies/studies.module';
 import { ClassroomsModule } from './models/classrooms/classrooms.module';
+import { EventsModule } from './models/events/events.module';
+import { PeriodsModule } from './models/periods/periods.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { ClassroomsModule } from './models/classrooms/classrooms.module';
     CoursesModule,
     StudiesModule,
     ClassroomsModule,
+    EventsModule,
+    PeriodsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

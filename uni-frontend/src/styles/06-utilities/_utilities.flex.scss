@@ -13,3 +13,7 @@
 .#{$u}flex-center {
     @include flex-center;
 }
+
+.#{$u}flex-wrap {
+    @include flex-wrap;
+}

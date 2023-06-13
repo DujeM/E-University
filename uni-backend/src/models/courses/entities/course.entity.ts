@@ -1,7 +1,8 @@
 import { BaseEntity } from 'src/models/base.entity';
+import { Event } from 'src/models/events/entities/event.entity';
 import { Study } from 'src/models/studies/entities/study.entity';
 import { User } from 'src/models/users/entities/user.entity';
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Course extends BaseEntity {
@@ -16,6 +17,9 @@ export class Course extends BaseEntity {
 
   @ManyToOne(() => Study, (study: Study) => study.courses)
   study: Study;
+
+  @OneToMany(() => Event, (event: Event) => event.course)
+  events: Event[];
 
   @ManyToMany(() => User, (user) => user.enrolledCourses, {
     onDelete: 'NO ACTION',

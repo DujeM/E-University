@@ -25,6 +25,11 @@ import { ClassroomEditComponent } from './classrooms/classroom-edit/classroom-ed
 import { ClassroomDetailsComponent } from './classrooms/classroom-details/classroom-details.component';
 import { ClassroomListComponent } from './classrooms/classroom-list/classroom-list.component';
 import { StudyListComponent } from './studies/study-list/study-list.component';
+import { PeriodsComponent } from './periods/periods.component';
+import { PeriodListComponent } from './periods/period-list/period-list.component';
+import { PeriodNewComponent } from './periods/period-new/period-new.component';
+import { PeriodEditComponent } from './periods/period-edit/period-edit.component';
+import { PeriodDetailsComponent } from './periods/period-details/period-details.component';
 
 
 @NgModule({
@@ -49,7 +54,12 @@ import { StudyListComponent } from './studies/study-list/study-list.component';
     ClassroomEditComponent,
     ClassroomDetailsComponent,
     ClassroomListComponent,
-    StudyListComponent
+    StudyListComponent,
+    PeriodsComponent,
+    PeriodListComponent,
+    PeriodNewComponent,
+    PeriodEditComponent,
+    PeriodDetailsComponent
   ],
   imports: [
     CommonModule,

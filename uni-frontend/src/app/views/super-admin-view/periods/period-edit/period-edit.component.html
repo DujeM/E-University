@@ -1,0 +1,16 @@
+<h1>Edit period</h1>
+<form *ngIf="period" class="u-flex-column gap-15" [formGroup]="editPeriodForm">
+    <div class="u-flex-column">
+        <label class="c-input-label" for="order">Order</label>
+        <input class="c-input" type="text" name="order" id="order" formControlName="order" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="start">Start</label>
+        <input class="c-input" type="time" name="start" id="start" formControlName="start" autocomplete="off">
+    </div>
+    <div class="u-flex-column">
+        <label class="c-input-label" for="end">End</label>
+        <input class="c-input" type="time" name="end" id="end" formControlName="end" autocomplete="off">
+    </div>
+    <button class="c-button" (click)="submit()" type="submit">Update</button>
+  </form>

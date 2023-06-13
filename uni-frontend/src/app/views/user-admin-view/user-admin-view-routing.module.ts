@@ -9,11 +9,16 @@ import { ProfileDetailsComponent } from './profile/profile-details/profile-detai
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserAdminViewComponent } from './user-admin-view.component';
+import { ScheduelComponent } from './scheduel/scheduel.component';
+import { ScheduelListComponent } from './scheduel/scheduel-list/scheduel-list.component';
+import { ScheduelNewComponent } from './scheduel/scheduel-new/scheduel-new.component';
+import { ScheduelDetailsComponent } from './scheduel/scheduel-details/scheduel-details.component';
+import { ScheduelEditComponent } from './scheduel/scheduel-edit/scheduel-edit.component';
 
 const routes: Routes = [
   {        
     path: '',
-    component: UserAdminViewComponent,
+    component: ScheduelListComponent,
   },
   { 
     path: 'courses', 
@@ -32,7 +37,17 @@ const routes: Routes = [
         { path: '', component: ProfileDetailsComponent },
         { path: 'edit', component: ProfileEditComponent },
     ]
-  }
+  },
+  { 
+    path: 'scheduel', 
+    component: ScheduelComponent,
+    children: [
+        { path: '', component: ScheduelListComponent },
+        { path: 'new', component: ScheduelNewComponent },
+        { path: ':id', component: ScheduelDetailsComponent },
+        { path: ':id/edit', component: ScheduelEditComponent },
+    ]
+  },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { StudiesService } from 'src/app/core/services/studies.service';
 import { Study } from 'src/app/shared/models/study.model';
@@ -8,7 +8,7 @@ import { Study } from 'src/app/shared/models/study.model';
   templateUrl: './study-list.component.html',
   styleUrls: ['./study-list.component.scss']
 })
-export class StudyListComponent {
+export class StudyListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   studies: Study[] = [];
   tableHeaders: string[] = [];

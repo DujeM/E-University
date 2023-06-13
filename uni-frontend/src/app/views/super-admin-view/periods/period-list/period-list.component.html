@@ -1,0 +1,13 @@
+<div class="u-flex-between">
+    <h1>Periods</h1>
+    <button class="c-button c-button__action" [routerLink]="['./new']">Add period</button>
+</div>
+<app-table [data]="periods" [headers]="tableHeaders">
+    <ng-container *ngFor="let period of periods">
+        <div class="c-table__row u-flex gap-20" [routerLink]="['./' + period.id]">
+            <div class="c-table__cell">{{ period.order }}</div>
+            <div class="c-table__cell">{{ period.start }}</div>
+            <div class="c-table__cell">{{ period.end }}</div>
+        </div>
+    </ng-container>
+</app-table>

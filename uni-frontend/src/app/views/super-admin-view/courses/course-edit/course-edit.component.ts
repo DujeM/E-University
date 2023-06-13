@@ -49,7 +49,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
     this.studiesService.getAll()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(studies => {
-        console.log(studies)
         this.studies = studies;
       })
   }

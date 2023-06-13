@@ -10,6 +10,11 @@
     max-width: 33.333%;
     @include flex-column;
     margin-bottom: 20px;
+
+    &--full-width {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .#{$c}card__item--title-color { 

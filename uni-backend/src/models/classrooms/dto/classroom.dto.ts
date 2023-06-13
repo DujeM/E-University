@@ -1,5 +1,6 @@
 import { IsString, IsUUID } from 'class-validator';
 import { Classroom } from '../entities/classroom.entity';
+import { Event } from 'src/models/events/entities/event.entity';
 
 export class ClassroomDto {
   @IsUUID()
@@ -7,6 +8,8 @@ export class ClassroomDto {
 
   @IsString()
   code: string;
+
+  events?: Event[];
 
   public static from(dto: Partial<ClassroomDto>) {
     const c = new ClassroomDto();
@@ -19,6 +22,7 @@ export class ClassroomDto {
     return this.from({
       id: entity.id,
       code: entity.code,
+      events: entity.events,
     });
   }
 

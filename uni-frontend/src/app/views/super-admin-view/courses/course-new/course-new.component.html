@@ -1,14 +1,14 @@
 <h1>Add course</h1>
-<form class="u-flex-column gap-15" [formGroup]="addCourseForm">
-    <div class="u-flex-column">
+<form class="u-flex-wrap gap-15" [formGroup]="addCourseForm">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="name">Name</label>
         <input class="c-input" type="text" name="name" id="name" formControlName="name" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="code">Code</label>
         <input class="c-input" type="text" name="code" id="code" formControlName="code" autocomplete="off">
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="owner">Owner</label>
         <select class="c-input" formControlName="owner">
             <option *ngFor="let admin of admins" [ngValue]="admin">
@@ -16,7 +16,7 @@
             </option>
         </select>
     </div>
-    <div class="u-flex-column">
+    <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="study">Study</label>
         <select class="c-input" formControlName="study">
             <option *ngFor="let study of studies" [ngValue]="study">
@@ -24,5 +24,7 @@
             </option>
         </select>
     </div>
-    <button class="c-button" (click)="submit()" type="submit">Create</button>
+    <div class="u-flex-center">
+        <button class="c-button c-button__action" (click)="submit()" type="submit">Create</button>
+    </div>
   </form>

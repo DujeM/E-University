@@ -62,7 +62,6 @@ export class AuthenticationService {
     }
     const jwtHelper = new JwtHelperService();
     const decodedToken = jwtHelper.decodeToken(token);
-    console.log(decodedToken)
 
     this.roles = decodedToken.roles;
     this.id = decodedToken.id;
