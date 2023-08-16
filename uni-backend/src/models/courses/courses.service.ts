@@ -25,7 +25,7 @@ export class CoursesService {
 
   async findOne(id: string): Promise<CourseDto> {
     return await this.repository
-      .find({ where: { id }, relations: ['owner', 'study'] })
+      .find({ where: { id }, relations: ['owner', 'study', 'posts'] })
       .then((course) => CourseDto.fromEntity(course[0]));
   }
 

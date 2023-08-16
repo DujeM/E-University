@@ -10,6 +10,7 @@ import { StudiesModule } from './models/studies/studies.module';
 import { ClassroomsModule } from './models/classrooms/classrooms.module';
 import { EventsModule } from './models/events/events.module';
 import { PeriodsModule } from './models/periods/periods.module';
+import { PostsModule } from './models/posts/posts.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PeriodsModule } from './models/periods/periods.module';
     ClassroomsModule,
     EventsModule,
     PeriodsModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,6 +3,7 @@ import { User } from 'src/models/users/entities/user.entity';
 import { Course } from '../entities/course.entity';
 import { Study } from 'src/models/studies/entities/study.entity';
 import { Event } from 'src/models/events/entities/event.entity';
+import { Post } from 'src/models/posts/entities/post.entity';
 
 export class CourseDto {
   @IsUUID()
@@ -20,6 +21,8 @@ export class CourseDto {
 
   events?: Event[];
 
+  posts?: Post[];
+
   public static from(dto: Partial<CourseDto>) {
     const c = new CourseDto();
     c.id = dto.id;
@@ -27,6 +30,7 @@ export class CourseDto {
     c.code = dto.code;
     c.owner = dto.owner;
     c.study = dto.study;
+    c.posts = dto.posts;
     return c;
   }
 
@@ -38,6 +42,7 @@ export class CourseDto {
       owner: entity.owner,
       study: entity.study,
       events: entity.events,
+      posts: entity.posts,
     });
   }
 
@@ -48,6 +53,7 @@ export class CourseDto {
     c.code = this.code;
     c.owner = this.owner;
     c.study = this.study;
+    c.posts = this.posts;
     c.createDateTime = new Date();
     return c;
   }

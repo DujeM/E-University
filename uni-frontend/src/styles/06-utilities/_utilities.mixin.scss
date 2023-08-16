@@ -1,0 +1,9 @@
+// Text color
+//--------------------
+@mixin text-color-modifiers {
+    @each $name, $color in $text-colors {
+      &-#{"" + $name} {
+        color: $color;
+      }
+    }
+}

@@ -1,7 +1,7 @@
 /*------ 00-Settings - Global and component settings ------*/
 
-@import "00-settings/settings.global";
 @import "00-settings/settings.colors";
+@import "00-settings/settings.global";
 @import "00-settings/settings.fonts"; 
 @import "00-settings/settings.namespace"; 
 
@@ -48,3 +48,5 @@
 @import "06-utilities/utilities.flex";
 @import "06-utilities/utilities.spacing";
 @import "06-utilities/utilities.position";
+@import "06-utilities/utilities.mixin";
+@import "06-utilities/utilities.text";

@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/models/base.entity';
 import { Event } from 'src/models/events/entities/event.entity';
+import { Post } from 'src/models/posts/entities/post.entity';
 import { Study } from 'src/models/studies/entities/study.entity';
 import { User } from 'src/models/users/entities/user.entity';
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
@@ -26,4 +27,7 @@ export class Course extends BaseEntity {
     onUpdate: 'NO ACTION',
   })
   students?: User[];
+
+  @OneToMany(() => Post, (post: Post) => post.course)
+  posts: Post[];
 }

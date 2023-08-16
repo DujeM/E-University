@@ -1,3 +1,11 @@
 // Settings - Global
 $spaces: (0, 5, 8, 10, 12, 14, 15, 16, 18, 20, 22, 24, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 280);
 $sides: (top, bottom, left, right);
+$text-colors: (
+    primary: $primary,
+    secondary: $secondary,
+    danger: $danger,
+    white: $white,
+    black: $black,
+    gray: $gray
+);

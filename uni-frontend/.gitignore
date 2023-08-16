@@ -59,3 +59,7 @@ baseline.json
 aio/content/examples/.DS_Store
 
 /.angular/
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

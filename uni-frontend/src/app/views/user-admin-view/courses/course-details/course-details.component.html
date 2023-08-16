@@ -1,1 +1,54 @@
-<p>course-details works!</p>
+<div class="u-flex-between" *ngIf="course">
+    <h1>{{ course.name }}</h1>
+    <button class="c-button c-button__action" (click)="createPostInProgress = true">Add post</button>
+</div>
+<div class="c-card m-b-20" *ngIf="course">
+    <div class="c-card__item">
+        <span class="c-card__item--title-color">Study</span>
+        <span>{{ course.study.name }}</span>
+    </div>
+    <div class="c-card__item">
+        <span  class="c-card__item--title-color">Owner Name</span>
+        <span>{{ course.owner.firstName }} {{ course.owner.lastName }}</span>
+    </div>
+    <div class="c-card__item">
+        <span  class="c-card__item--title-color">Owner Email</span>
+        <span>{{ course.owner.email }}</span>
+    </div>
+</div>
+<div class="c-card u-flex-column" *ngIf="course">
+    <h1>Latest posts</h1>
+    <div *ngFor="let post of course.posts" class="c-card__item c-card__separator gap-10">
+        <span class="c-card__item--title-color">{{ post.title }}</span>
+        <span>{{ post.description }}</span>
+        <a class="u-text-primary" *ngIf="post.fileName && post.fileUrl" download="{{ post.fileName }}" target="_blank" href="{{ post.fileUrl }}">
+            <fa-icon [icon]="faFile"></fa-icon>
+            {{ post.fileName }}
+        </a>
+    </div>
+</div>
+
+<ng-container *ngIf="createPostInProgress">
+    <app-modal class="u-flex-center">
+        <div class="c-modal">
+            <h2>Add post</h2>
+            <form class="u-flex-column gap-15" [formGroup]="createPostForm">
+                <div class="u-flex-column">
+                    <label class="c-input-label" for="title">Title</label>
+                    <input class="c-input" type="text" name="title" id="title" formControlName="title" autocomplete="off">
+                </div>
+                <div class="u-flex-column">
+                    <label class="c-input-label" for="description">Description</label>
+                    <input class="c-input" type="text" name="description" id="description" formControlName="description" autocomplete="off">
+                </div>
+                <div class="u-flex-column">
+                    <label for="uploadBtn" class="button">Choose a file</label>
+                    <input type="file" id="uploadBtn" class="file-input" name="file" id="file" (change)="onDrop($event)">
+                </div>                
+                <div class="u-flex-center">
+                    <button class="c-button c-button__action" (click)="createPost()" type="submit" [disabled]="uploadInProgress">Create</button>
+                </div>
+            </form>
+        </div>
+    </app-modal>
+</ng-container>

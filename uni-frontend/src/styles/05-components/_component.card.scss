@@ -17,6 +17,12 @@
     }
 }
 
+.#{$c}card__separator {
+    padding: 10px;
+    border-bottom: 1px solid #6b6b6b;
+    max-width: unset;
+}
+
 .#{$c}card__item--title-color { 
     color: $secondary;
 }
