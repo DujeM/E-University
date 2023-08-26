@@ -7,6 +7,8 @@ import { Days } from 'src/app/shared/enums/days.enum';
 import { Event } from 'src/app/shared/models/event.model';
 import { Period } from 'src/app/shared/models/period.model';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { startOfWeek, endOfWeek, format, addWeeks } from 'date-fns'
+import { faChevronCircleLeft, faChevronCircleRight }  from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-scheduel-list',
@@ -23,12 +25,23 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
   eventPreviewInProgress = false;
   displayEvent!: Event;
   faXmark = faXmark;
+  currentDate = new Date();
+  startOfTheWeek: string = '';
+  endOfTheWeek: string = ''; 
+  faChevronLeft = faChevronCircleLeft;
+  faChevronRight = faChevronCircleRight;
   
   constructor(
     private eventsService: EventsService, 
     private authService: AuthenticationService,
     private periodsService: PeriodsService
-    ) {}
+    ) {
+      this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
+      this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
+
+      console.log(this.startOfTheWeek)
+      console.log(this.endOfTheWeek)
+    }
 
   ngOnInit() {
     this.periodsService.getAll().pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
@@ -71,5 +84,11 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
 
     this.eventPreviewInProgress = true;
     this.displayEvent = e;
+  }
+
+  changeCurrentWeek(offset: number) {
+    this.currentDate = addWeeks(this.currentDate, offset);
+    this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
+    this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
   }
 }

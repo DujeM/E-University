@@ -2,6 +2,13 @@
     <h1>Schedule</h1>
     <button class="c-button c-button__action" [routerLink]="['./new']">Add event</button>
 </div>
+<div>
+    <div class="u-flex gap-10 m-b-20">
+        <fa-icon class="u-hover-pointer" [icon]="faChevronLeft" (click)="changeCurrentWeek(-1)"></fa-icon>
+        <p>{{ startOfTheWeek }} - {{ endOfTheWeek }}</p>
+        <fa-icon class="u-hover-pointer" [icon]="faChevronRight" (click)="changeCurrentWeek(1)"></fa-icon>
+    </div>
+</div>
 <div class="c-schedule" *ngIf="matrix.length">
     <div class="u-flex">
         <div class="c-schedule__cell"></div>
