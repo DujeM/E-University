@@ -1,4 +1,4 @@
-import { IsBoolean, IsString, IsUUID } from 'class-validator';
+import { IsBoolean, IsNumber, IsString, IsUUID } from 'class-validator';
 import { Classroom } from 'src/models/classrooms/entities/classroom.entity';
 import { Course } from 'src/models/courses/entities/course.entity';
 import { Period } from 'src/models/periods/entities/period.entity';
@@ -20,6 +20,11 @@ export class EventDto {
   @IsString()
   startDate: string;
 
+  @IsNumber()
+  day: number;
+
+  canceledDates: string[];
+
   period: Period;
 
   classroom: Classroom;
@@ -32,6 +37,8 @@ export class EventDto {
     s.title = dto.title;
     s.details = dto.details;
     s.startDate = dto.startDate;
+    s.day = dto.day;
+    s.canceledDates = dto.canceledDates;
     s.recurring = dto.recurring;
     s.period = dto.period;
     s.classroom = dto.classroom;
@@ -45,6 +52,8 @@ export class EventDto {
       title: entity.title,
       details: entity.details,
       startDate: entity.startDate,
+      day: entity.day,
+      canceledDates: entity.canceledDates,
       recurring: entity.recurring,
       period: entity.period,
       classroom: entity.classroom,
@@ -58,6 +67,8 @@ export class EventDto {
     s.title = this.title;
     s.details = this.details;
     s.startDate = this.startDate;
+    s.day = this.day;
+    s.canceledDates = this.canceledDates;
     s.recurring = this.recurring;
     s.period = this.period;
     s.classroom = this.classroom;

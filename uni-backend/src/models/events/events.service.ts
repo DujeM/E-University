@@ -28,8 +28,8 @@ export class EventsService {
 
   async findOne(id: string): Promise<EventDto> {
     return await this.repository
-      .findOneBy({ id })
-      .then((study) => EventDto.fromEntity(study));
+      .find({ where: { id }, relations: ['period', 'classroom', 'course'] })
+      .then((event) => EventDto.fromEntity(event[0]));
   }
 
   async update(id: string, dto: EventDto): Promise<EventDto> {
@@ -37,8 +37,8 @@ export class EventsService {
   }
 
   async remove(id: string) {
-    const study = await this.findOne(id);
-    return this.repository.remove(study.toEntity());
+    const event = await this.findOne(id);
+    return this.repository.remove(event.toEntity());
   }
 
   async findPersonal(userId: string): Promise<EventDto[]> {
@@ -58,6 +58,17 @@ export class EventsService {
           course: Raw((alias) => `${alias} IN (:...coursesIds)`, {
             coursesIds: coursesIds,
           }),
+        },
+        relations: ['period', 'classroom', 'course'],
+      })
+      .then((events) => events.map((e) => EventDto.fromEntity(e)));
+  }
+
+  async findAllByDay(day: string): Promise<EventDto[]> {
+    return await this.repository
+      .find({
+        where: {
+          day: Number(day),
         },
         relations: ['period', 'classroom', 'course'],
       })

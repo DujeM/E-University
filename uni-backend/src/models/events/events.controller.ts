@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { EventDto } from './dto/event.dto';
@@ -34,7 +34,12 @@ export class EventsController {
     return this.eventsService.findPersonal(id);
   }
 
-  @Patch(':id')
+  @Get('/day/:day')
+  findAllByDay(@Param('day') day: string) {
+    return this.eventsService.findAllByDay(day);
+  }
+
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateEventDto: EventDto) {
     return this.eventsService.update(id, updateEventDto);
   }

@@ -19,6 +19,12 @@ export class Event extends BaseEntity {
     @Column()
     startDate: string;
 
+    @Column()
+    day: number;
+
+    @Column("text", { array: true, nullable: true })
+    canceledDates: string[];
+
     @ManyToOne(() => Period, (period: Period) => period.events)
     period: Period;
 
