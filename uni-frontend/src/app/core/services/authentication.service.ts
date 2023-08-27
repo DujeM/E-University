@@ -52,6 +52,10 @@ export class AuthenticationService {
     return this.roles.includes(Role.SUPER_ADMIN);
   }
 
+  isAdmin() {
+    return this.roles.includes(Role.ADMIN);
+  }
+
   private storeTokens(accessToken: string) {
     localStorage.setItem(TOKEN, accessToken);
   }

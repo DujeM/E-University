@@ -32,4 +32,8 @@ export class EventsService {
   delete(id: string) {
     return this.httpClient.delete<Event>(`http://localhost:3000/events/${id}`);
   }
+
+  getAllByDay(day: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:3000/events/day/${day}`);
+  }
 }

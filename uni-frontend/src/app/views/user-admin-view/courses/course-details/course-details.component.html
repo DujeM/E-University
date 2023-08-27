@@ -1,6 +1,6 @@
 <div class="u-flex-between" *ngIf="course">
     <h1>{{ course.name }}</h1>
-    <button class="c-button c-button__action" (click)="createPostInProgress = true">Add post</button>
+    <button class="c-button c-button__action" (click)="createPostInProgress = true" *ngIf="authService.isAdmin()">Add post</button>
 </div>
 <div class="c-card m-b-20" *ngIf="course">
     <div class="c-card__item">
@@ -31,6 +31,7 @@
 <ng-container *ngIf="createPostInProgress">
     <app-modal class="u-flex-center">
         <div class="c-modal">
+            <fa-icon class="c-modal__close" (click)="createPostInProgress = false;" [icon]="faXmark" [size]="'lg'"></fa-icon>
             <h2>Add post</h2>
             <form class="u-flex-column gap-15" [formGroup]="createPostForm">
                 <div class="u-flex-column">

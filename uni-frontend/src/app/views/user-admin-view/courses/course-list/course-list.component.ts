@@ -14,7 +14,7 @@ export class CourseListComponent {
   courses: Course[] = [];
   tableHeaders: string[] = [];
 
-  constructor(private usersService: UsersService, private authService: AuthenticationService) {}
+  constructor(private usersService: UsersService, public authService: AuthenticationService) {}
 
   ngOnInit() {
       this.usersService.get(this.authService.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {

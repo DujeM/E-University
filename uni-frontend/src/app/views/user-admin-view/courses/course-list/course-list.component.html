@@ -1,6 +1,6 @@
 <div class="u-flex-between">
     <h1>Courses</h1>
-    <button class="c-button c-button__action" [routerLink]="['./new']">Add course</button>
+    <button class="c-button c-button__action" [routerLink]="['./new']" *ngIf="!authService.isAdmin()">Add course</button>
 </div>
 <app-table [data]="courses" [headers]="tableHeaders">
     <ng-container *ngFor="let course of courses">

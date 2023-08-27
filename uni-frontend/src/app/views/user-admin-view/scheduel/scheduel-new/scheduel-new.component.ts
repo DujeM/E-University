@@ -10,6 +10,7 @@ import { Classroom } from 'src/app/shared/models/classroom.model';
 import { Course } from 'src/app/shared/models/course.model';
 import { Event } from 'src/app/shared/models/event.model';
 import { Period } from 'src/app/shared/models/period.model';
+import { getDay, compareAsc } from 'date-fns'
 
 @Component({
   selector: 'app-scheduel-new',
@@ -28,7 +29,9 @@ export class ScheduelNewComponent implements OnInit, OnDestroy {
   classroom!: FormControl;
   course!: FormControl;
 
+  allPeriods: Period[] = [];
   periods: Period[] = [];
+  allClassrooms: Classroom[] = [];
   classrooms: Classroom[] = [];
   courses: Course[] = [];
 
@@ -47,12 +50,14 @@ export class ScheduelNewComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(periods => {
       this.periods = periods;
+      this.allPeriods = periods;
     });
 
     this.classroomsService.getAll()
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(classrooms => {
       this.classrooms = classrooms;
+      this.allClassrooms = classrooms;
     });
 
     this.coursesService.getAll()
@@ -88,10 +93,26 @@ export class ScheduelNewComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.eventsService.create(this.addEventForm.value)
+    this.eventsService.create({...this.addEventForm.value, day: getDay(new Date(this.startDate.value))})
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res: Event) => {
         this.router.navigate(['..'])
+      });
+  }
+
+  getEventsByDay() {
+    this.eventsService.getAllByDay(getDay(new Date(this.startDate.value)))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((res: Event[]) => {
+        this.periods = this.allPeriods;
+        this.classrooms = this.allClassrooms;
+
+        res.forEach((e: Event) => {
+          if (e.recurring || compareAsc(new Date(e.startDate), new Date(this.startDate.value)) === 0) {
+            this.periods = this.periods.filter(p => p.id !== e.period.id);
+            this.classrooms = this.classrooms.filter(c => c.id !== e.classroom.id);
+          }
+        });
       });
   }
 }

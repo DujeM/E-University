@@ -8,6 +8,8 @@ export interface Event {
     details: string;
     recurring: boolean;
     startDate: string;
+    day: number;
+    canceledDates: string[];
     period: Period;
     classroom: Classroom;
     course: Course;
@@ -18,6 +20,7 @@ export interface NewEvent {
     details: string;
     recurring: boolean;
     startDate: string;
+    day: number;
     period: Period;
     classroom: Classroom;
     course: Course;

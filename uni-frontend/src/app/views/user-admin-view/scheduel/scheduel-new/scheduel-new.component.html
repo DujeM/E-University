@@ -10,7 +10,7 @@
     </div>
     <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="startDate">Date</label>
-        <input class="c-input" type="date" name="startDate" id="startDate" formControlName="startDate" autocomplete="off">
+        <input class="c-input" type="date" name="startDate" id="startDate" formControlName="startDate" autocomplete="off" (change)="getEventsByDay()">
     </div>
     <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="period">Period</label>
@@ -36,6 +36,10 @@
             </option>
         </select>
     </div>
+    <div class="u-flex-middle u-full-width gap-10">
+        <input type="checkbox" name="recurring" id="recurring" formControlName="recurring">
+        <label class="c-input-label" for="recurring">Recurring</label>
+    </div> 
     <div class="u-flex-center">
         <button class="c-button c-button__action" (click)="submit()" type="submit">Create</button>
     </div>

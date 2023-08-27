@@ -1,6 +1,6 @@
 <div class="u-flex-between">
     <h1>Schedule</h1>
-    <button class="c-button c-button__action" [routerLink]="['./new']">Add event</button>
+    <button class="c-button c-button__action" [routerLink]="['./new']" *ngIf="authService.isAdmin()">Add event</button>
 </div>
 <div>
     <div class="u-flex gap-10 m-b-20">
@@ -58,7 +58,18 @@
                     <span class="c-card__item--title-color">Recurring</span>
                     <span>{{ displayEvent.recurring }}</span>
                 </div>
+                <div class="u-flex-column gap-10 u-full-width" *ngIf="authService.isAdmin()">
+                    <button class="c-button c-button--secondary" [routerLink]="['./' + displayEvent.id + '/edit']">Edit</button>
+                    <button class="c-button c-button--primary" (click)="eventPreviewInProgress = false; cancelInProgress = true;">Cancel event on {{ getCurrentEventDay() }}</button>
+                    <button class="c-button c-button--danger" (click)="eventPreviewInProgress = false; deleteInProgress = true;">Delete event</button>
+                </div>
             </div>
         </div>
     </app-modal>
 </ng-container>    
+
+<ng-container *ngIf="deleteInProgress || cancelInProgress">
+    <app-modal>
+        <app-delete-modal (confirmDelete)="confirmDelete($event)" class="u-flex-center"></app-delete-modal>
+    </app-modal>
+</ng-container>

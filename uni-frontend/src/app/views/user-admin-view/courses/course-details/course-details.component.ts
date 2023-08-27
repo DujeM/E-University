@@ -7,16 +7,18 @@ import { Course } from 'src/app/shared/models/course.model';
 import { UploadTask, Storage } from '@angular/fire/storage';
 import { ref, uploadBytesResumable, getDownloadURL, uploadBytes } from "firebase/storage";
 import { PostsService } from 'src/app/core/services/posts.service';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { AuthenticationService } from 'src/app/core/services';
 
 @Component({
-  selector: 'app-course-details',
-  templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.scss']
+  selector: "app-course-details",
+  templateUrl: "./course-details.component.html",
+  styleUrls: ["./course-details.component.scss"],
 })
 export class CourseDetailsComponent {
   private ngUnsubscribe = new Subject<void>();
   faFile = faFile;
+  faXmark = faXmark;
   course!: Course;
   deleteInProgress = false;
   uploadInProgress = false;
@@ -29,10 +31,17 @@ export class CourseDetailsComponent {
   fileName!: FormControl;
   uploadedFile!: Blob;
 
-
-  constructor(private route: ActivatedRoute, private coursesService: CoursesService, private router: Router, private fb: FormBuilder, private storage: Storage, private postsService: PostsService) {
-    if (route.snapshot.params['id']) {
-      this.getCourseDetails(route.snapshot.params['id']);
+  constructor(
+    private route: ActivatedRoute,
+    private coursesService: CoursesService,
+    private router: Router,
+    private fb: FormBuilder,
+    private storage: Storage,
+    private postsService: PostsService,
+    public authService: AuthenticationService
+  ) {
+    if (route.snapshot.params["id"]) {
+      this.getCourseDetails(route.snapshot.params["id"]);
     }
     this.initForm();
   }
@@ -43,25 +52,25 @@ export class CourseDetailsComponent {
   }
 
   private initForm() {
-    this.title = new FormControl('', [Validators.required]);
-    this.description = new FormControl('', [Validators.required]);
-    this.fileUrl = new FormControl('');
-    this.fileName = new FormControl('');
+    this.title = new FormControl("", [Validators.required]);
+    this.description = new FormControl("", [Validators.required]);
+    this.fileUrl = new FormControl("");
+    this.fileName = new FormControl("");
 
     this.createPostForm = this.fb.group({
       title: this.title,
       description: this.description,
       fileUrl: this.fileUrl,
-      fileName: this.fileName
+      fileName: this.fileName,
     });
   }
 
   getCourseDetails(id: string) {
-    this.coursesService.get(id)
+    this.coursesService
+      .get(id)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.course = res;
-        console.log(this.course)
       });
   }
 
@@ -70,13 +79,13 @@ export class CourseDetailsComponent {
       return;
     }
 
-    this.postsService.create({ ...this.createPostForm.value, course: this.course })
+    this.postsService
+      .create({ ...this.createPostForm.value, course: this.course })
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.createPostInProgress = false;
         this.getCourseDetails(this.course.id);
       });
-    console.log(this.createPostForm.value)
   }
 
   onDrop(file: any) {
@@ -87,7 +96,7 @@ export class CourseDetailsComponent {
         this.uploadInProgress = false;
         return;
       }
-      this.uploadedFile = new Blob([reader.result])
+      this.uploadedFile = new Blob([reader.result]);
       this.startUpload(file.target.files[0]);
     };
     reader.readAsDataURL(file.target.files[0]);
@@ -99,15 +108,17 @@ export class CourseDetailsComponent {
     const path = `${file.name}`;
     const fileRef = ref(this.storage, path);
 
-    uploadBytes(fileRef, this.uploadedFile).then(res => {
-      getDownloadURL(fileRef).then((url) => {
-        this.fileUrl.setValue(url);
-        this.fileName.setValue(file.name);
+    uploadBytes(fileRef, this.uploadedFile)
+      .then((res) => {
+        getDownloadURL(fileRef).then((url) => {
+          this.fileUrl.setValue(url);
+          this.fileName.setValue(file.name);
+          this.uploadInProgress = false;
+        });
+      })
+      .catch((err) => {
         this.uploadInProgress = false;
+        console.error(err);
       });
-    }).catch(err => {
-      this.uploadInProgress = false;
-      console.error(err);
-    })
   }
 }

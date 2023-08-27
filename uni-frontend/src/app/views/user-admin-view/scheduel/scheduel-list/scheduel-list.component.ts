@@ -7,8 +7,9 @@ import { Days } from 'src/app/shared/enums/days.enum';
 import { Event } from 'src/app/shared/models/event.model';
 import { Period } from 'src/app/shared/models/period.model';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { startOfWeek, endOfWeek, format, addWeeks } from 'date-fns'
+import { startOfWeek, endOfWeek, format, addWeeks, compareAsc, isWithinInterval, getDay, addDays } from 'date-fns'
 import { faChevronCircleLeft, faChevronCircleRight }  from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-scheduel-list',
@@ -23,6 +24,8 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
   days = Object.keys(Days).filter((d) => !isNaN(Number(d)));
   daysValues = Object.values(Days).filter((d) => isNaN(Number(d)));
   eventPreviewInProgress = false;
+  deleteInProgress = false;
+  cancelInProgress = false;
   displayEvent!: Event;
   faXmark = faXmark;
   currentDate = new Date();
@@ -33,14 +36,12 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
   
   constructor(
     private eventsService: EventsService, 
-    private authService: AuthenticationService,
-    private periodsService: PeriodsService
+    public authService: AuthenticationService,
+    private periodsService: PeriodsService,
+    private router: Router
     ) {
-      this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
-      this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
-
-      console.log(this.startOfTheWeek)
-      console.log(this.endOfTheWeek)
+      this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+      this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'yyyy-MM-dd');
     }
 
   ngOnInit() {
@@ -50,31 +51,54 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
 
     this.eventsService.getPersonal(this.authService.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.events = res;
-
-      this.periods.forEach((row, i) => {
-        this.matrix[i] = [];
-        this.days.forEach((col, j) => {
-            this.matrix[i][j] = null;
-        });
-      });
-
-      this.events.forEach(e => {
-        this.periods.forEach((row, i) => {
-          this.days.forEach((col, j) => {
-            if (e.period.order === row.order && new Date(e.startDate).getDay() === j + 1) {
-              this.matrix[i][j] = e;
-            }
-          });
-        });
-      });
-
-      console.log(this.matrix);
+      this.renderScheduel();
     });
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  checkDisplayedEvent(e: Event) {
+    if (e.canceledDates && e.canceledDates.includes(this.getCurrentEventDay())) {
+      return false;
+    }
+
+    if (compareAsc(new Date(e.startDate), new Date(this.startOfTheWeek)) === -1) {
+      return false;
+    }
+
+    if (e.recurring) {
+      return true;
+    }
+
+    if (isWithinInterval(new Date(e.startDate), { start: new Date(this.startOfTheWeek), end: new Date(this.endOfTheWeek)})) {
+      return true;
+    }
+
+    return false;
+  }
+
+  renderScheduel() {
+    this.periods.forEach((row, i) => {
+      this.matrix[i] = [];
+      this.days.forEach((col, j) => {
+          this.matrix[i][j] = null;
+      });
+    });
+
+    this.events.forEach(e => {
+      this.periods.forEach((row, i) => {
+        this.days.forEach((col, j) => {
+          if (e.period.order === row.order && new Date(e.startDate).getDay() === j + 1) {
+            if (this.checkDisplayedEvent(e)) {
+              this.matrix[i][j] = e;
+            }
+          }
+        });
+      });
+    });
   }
 
   previewEvent(e: Event) {
@@ -88,7 +112,43 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
 
   changeCurrentWeek(offset: number) {
     this.currentDate = addWeeks(this.currentDate, offset);
-    this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
-    this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'dd.MM.yyyy');
+    this.startOfTheWeek = format(startOfWeek(this.currentDate, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+    this.endOfTheWeek = format(endOfWeek(this.currentDate, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+    this.renderScheduel();
+  }
+
+  getCurrentEventDay() {
+    return format(addDays(new Date(this.startOfTheWeek), this.displayEvent.day - 1), 'yyyy-MM-dd');
+  }
+
+  confirmDelete(event: boolean) {
+    if (!event) {
+      this.deleteInProgress = false;
+      this.cancelInProgress = false;
+      return;
+    } 
+
+    if (this.cancelInProgress) {
+      this.eventsService
+        .edit({
+          ...this.displayEvent,
+          canceledDates: this.displayEvent.canceledDates
+            ? [...this.displayEvent.canceledDates, this.getCurrentEventDay()]
+            : [this.getCurrentEventDay()],
+        })
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((res) => {
+          this.cancelInProgress = false;
+          this.ngOnInit();
+        });
+      return;
+    }
+
+    this.eventsService.delete(this.displayEvent.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(res => {
+        this.deleteInProgress = false;
+        this.ngOnInit();
+      });
   }
 }

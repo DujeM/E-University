@@ -17,3 +17,7 @@
 .#{$u}flex-wrap {
     @include flex-wrap;
 }
+
+.#{$u}flex-middle {
+    @include flex-middle;
+}

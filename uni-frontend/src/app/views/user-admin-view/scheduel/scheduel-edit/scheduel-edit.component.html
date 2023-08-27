@@ -1,1 +1,46 @@
-<p>scheduel-edit works!</p>
+<h1>Edit event</h1>
+<form *ngIf="event && editEventForm" class="u-flex-wrap gap-15" [formGroup]="editEventForm">
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="title">Title</label>
+        <input class="c-input" type="text" name="title" id="title" formControlName="title" autocomplete="off">
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="details">Details</label>
+        <input class="c-input" type="text" name="details" id="details" formControlName="details" autocomplete="off">
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="startDate">Date</label>
+        <input class="c-input" type="date" name="startDate" id="startDate" formControlName="startDate" autocomplete="off" (change)="getEventsByDay()">
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="period">Period</label>
+        <select class="c-input" formControlName="period">
+            <option *ngFor="let period of periods" [ngValue]="period.id">
+              {{ period.start }} - {{ period.end }}
+            </option>
+        </select>
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="classroom">Classroom</label>
+        <select class="c-input" formControlName="classroom">
+            <option *ngFor="let classroom of classrooms" [ngValue]="classroom.id">
+              {{ classroom.code }}
+            </option>
+        </select>
+    </div>
+    <div class="u-flex-column u-half-width">
+        <label class="c-input-label" for="course">Course</label>
+        <select class="c-input" formControlName="course">
+            <option *ngFor="let course of courses" [ngValue]="course.id">
+              {{ course.name }}
+            </option>
+        </select>
+    </div>
+    <div class="u-flex-middle u-full-width gap-10">
+        <input type="checkbox" name="recurring" id="recurring" formControlName="recurring">
+        <label class="c-input-label" for="recurring">Recurring</label>
+    </div> 
+    <div class="u-flex-center">
+        <button class="c-button c-button__action" (click)="submit()" type="submit">Create</button>
+    </div>
+  </form>
