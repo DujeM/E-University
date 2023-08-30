@@ -9,14 +9,14 @@
         <fa-icon class="u-hover-pointer" [icon]="faChevronRight" (click)="changeCurrentWeek(1)"></fa-icon>
     </div>
 </div>
-<div class="c-schedule" *ngIf="matrix.length">
+<div class="c-schedule" *ngIf="scheduel.length">
     <div class="u-flex">
         <div class="c-schedule__cell"></div>
         <div class="c-schedule__cell" *ngFor="let d of daysValues">
             <span>{{ d }}</span>
         </div>
     </div>
-    <div class="u-flex" *ngFor="let row of matrix; let i = index;">
+    <div class="u-flex" *ngFor="let row of scheduel; let i = index;">
         <div class="c-schedule__cell">
             <span>{{ periods[i].start}} - {{ periods[i].end }}</span>
         </div>
@@ -56,11 +56,11 @@
                 </div>
                 <div class="c-card__item c-card__item--full-width">
                     <span class="c-card__item--title-color">Recurring</span>
-                    <span>{{ displayEvent.recurring }}</span>
+                    <span>{{ displayEvent.recurring ? 'Yes' : 'No' }}</span>
                 </div>
                 <div class="u-flex-column gap-10 u-full-width" *ngIf="authService.isAdmin()">
-                    <button class="c-button c-button--secondary" [routerLink]="['./' + displayEvent.id + '/edit']">Edit</button>
-                    <button class="c-button c-button--primary" (click)="eventPreviewInProgress = false; cancelInProgress = true;">Cancel event on {{ getCurrentEventDay() }}</button>
+                    <button class="c-button c-button--primary" [routerLink]="['./' + displayEvent.id + '/edit']">Edit</button>
+                    <button class="c-button c-button--secondary" (click)="eventPreviewInProgress = false; cancelInProgress = true;">Cancel event on {{ getCurrentEventDay() }}</button>
                     <button class="c-button c-button--danger" (click)="eventPreviewInProgress = false; deleteInProgress = true;">Delete event</button>
                 </div>
             </div>

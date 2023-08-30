@@ -20,7 +20,7 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   events: Event[] = [];
   periods: Period[] = [];
-  matrix: any[][] = [];
+  scheduel: any[][] = [];
   days = Object.keys(Days).filter((d) => !isNaN(Number(d)));
   daysValues = Object.values(Days).filter((d) => isNaN(Number(d)));
   eventPreviewInProgress = false;
@@ -61,15 +61,11 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
   }
 
   checkDisplayedEvent(e: Event) {
-    if (e.canceledDates && e.canceledDates.includes(this.getCurrentEventDay())) {
+    if (e.canceledDates && e.canceledDates.includes(this.getCurrentEventDay(e.day))) {
       return false;
     }
 
-    if (compareAsc(new Date(e.startDate), new Date(this.startOfTheWeek)) === -1) {
-      return false;
-    }
-
-    if (e.recurring) {
+    if (e.recurring && compareAsc(new Date(e.startDate), new Date(this.getCurrentEventDay(e.day))) === -1) {
       return true;
     }
 
@@ -80,20 +76,27 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  renderScheduel() {
+  initScheduel() {
     this.periods.forEach((row, i) => {
-      this.matrix[i] = [];
+      this.scheduel[i] = [];
       this.days.forEach((col, j) => {
-          this.matrix[i][j] = null;
+          this.scheduel[i][j] = null;
       });
     });
+  }
+
+  renderScheduel() {
+    this.initScheduel();
 
     this.events.forEach(e => {
       this.periods.forEach((row, i) => {
         this.days.forEach((col, j) => {
-          if (e.period.order === row.order && new Date(e.startDate).getDay() === j + 1) {
+          if (
+            e.period.order === row.order &&
+            new Date(e.startDate).getDay() === j + 1
+          ) {
             if (this.checkDisplayedEvent(e)) {
-              this.matrix[i][j] = e;
+              this.scheduel[i][j] = e;
             }
           }
         });
@@ -117,8 +120,8 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
     this.renderScheduel();
   }
 
-  getCurrentEventDay() {
-    return format(addDays(new Date(this.startOfTheWeek), this.displayEvent.day - 1), 'yyyy-MM-dd');
+  getCurrentEventDay(customDay?: number) {
+    return format(addDays(new Date(this.startOfTheWeek), !customDay ? this.displayEvent.day - 1 : customDay - 1), 'yyyy-MM-dd');
   }
 
   confirmDelete(event: boolean) {

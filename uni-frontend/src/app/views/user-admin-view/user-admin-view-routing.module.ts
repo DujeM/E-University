@@ -18,36 +18,43 @@ import { ScheduelEditComponent } from './scheduel/scheduel-edit/scheduel-edit.co
 const routes: Routes = [
   {        
     path: '',
-    component: ScheduelListComponent,
-  },
-  { 
-    path: 'courses', 
-    component: CoursesComponent,
+    component: UserAdminViewComponent,
     children: [
-        { path: '', component: CourseListComponent },
-        { path: 'new', component: CourseNewComponent },
-        { path: ':id', component: CourseDetailsComponent },
-        { path: ':id/edit', component: CourseEditComponent },
+      { 
+        path: '',
+        redirectTo: 'scheduel',
+        pathMatch: 'full'
+      },
+      { 
+        path: 'courses', 
+        component: CoursesComponent,
+        children: [
+            { path: '', component: CourseListComponent },
+            { path: 'new', component: CourseNewComponent },
+            { path: ':id', component: CourseDetailsComponent },
+            { path: ':id/edit', component: CourseEditComponent },
+        ]
+      },
+      { 
+        path: 'profile', 
+        component: ProfileComponent,
+        children: [
+            { path: '', component: ProfileDetailsComponent },
+            { path: 'edit', component: ProfileEditComponent },
+        ]
+      },
+      { 
+        path: 'scheduel', 
+        component: ScheduelComponent,
+        children: [
+            { path: '', component: ScheduelListComponent },
+            { path: 'new', component: ScheduelNewComponent },
+            { path: ':id', component: ScheduelDetailsComponent },
+            { path: ':id/edit', component: ScheduelEditComponent },
+        ]
+      }
     ]
-  },
-  { 
-    path: 'profile', 
-    component: ProfileComponent,
-    children: [
-        { path: '', component: ProfileDetailsComponent },
-        { path: 'edit', component: ProfileEditComponent },
-    ]
-  },
-  { 
-    path: 'scheduel', 
-    component: ScheduelComponent,
-    children: [
-        { path: '', component: ScheduelListComponent },
-        { path: 'new', component: ScheduelNewComponent },
-        { path: ':id', component: ScheduelDetailsComponent },
-        { path: ':id/edit', component: ScheduelEditComponent },
-    ]
-  },
+  }
 ];
 
 @NgModule({
