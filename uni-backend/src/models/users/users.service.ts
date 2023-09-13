@@ -40,7 +40,7 @@ export class UsersService {
   async findOneByUsername(username: string): Promise<UserDto> {
     return await this.repository
       .findOneBy({ username })
-      .then((user) => UserDto.fromEntity(user));
+      .then((user) => (user ? UserDto.fromEntity(user) : null));
   }
 
   async update(id: string, dto: UserDto): Promise<UserDto> {

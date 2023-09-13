@@ -22,7 +22,7 @@ export const authorizationInterceptor: HttpInterceptorFn = (req: HttpRequest<unk
             if (err instanceof HttpErrorResponse && err.status === 401) {
                 authService.logout();
             }
-            return of(err);
+            return throwError(err);
         })
     );
 }

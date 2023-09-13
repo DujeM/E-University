@@ -1,4 +1,10 @@
-import { Controller, Request, Post, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Request,
+  Post,
+  UseGuards,
+  NotFoundException,
+} from '@nestjs/common';
 import { LocalAuthGuard } from 'src/common/guards/local-auth.guard';
 import { AuthService } from './auth.service';
 
@@ -9,6 +15,10 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    try {
+      return this.authService.login(req.user);
+    } catch {
+      throw new NotFoundException();
+    }
   }
 }

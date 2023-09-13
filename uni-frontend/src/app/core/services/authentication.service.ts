@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap, throwError } from 'rxjs';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { TokenResponse } from 'src/app/shared/models/auth.model';
 
@@ -25,7 +25,11 @@ export class AuthenticationService {
           this.decodeToken(tokens.access_token);
         }
       }),
-      map(token => token)      
+      catchError(err => {
+        alert("User does not exist.")
+        return throwError(err);
+      }),    
+      map(token => token)  
     );
   }
 
