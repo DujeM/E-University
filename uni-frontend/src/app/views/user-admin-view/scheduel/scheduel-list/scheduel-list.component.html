@@ -20,11 +20,13 @@
         <div class="c-schedule__cell">
             <span>{{ periods[i].start}} - {{ periods[i].end }}</span>
         </div>
-        <div class="c-schedule__cell" *ngFor="let col of row; let j = index;" [ngClass]="{ 'c-schedule__cell--fill' : col }" (click)="previewEvent(col)">
-            <div class="u-full-width u-full-height u-flex-column u-flex-between" *ngIf="col">
-                <span>{{ col.title }}</span>
-                <span class="c-schedule__cell-subtitle">{{ col.classroom.code }}</span>
-            </div>
+        <div class="c-schedule__cell" *ngFor="let col of row; let j = index;" [ngClass]="{ 'c-schedule__cell--fill' : col.length }">
+            <ng-container *ngIf="col.length">
+                <div class="u-full-width u-flex-column gap-5" *ngFor="let value of col" [ngClass]="{ 'c-schedule__cell--border' : col.length > 1 }" (click)="previewEvent(value)">
+                    <span>{{ value.title }}</span>
+                    <span class="c-schedule__cell-subtitle">{{ value.classroom.code }}</span>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>

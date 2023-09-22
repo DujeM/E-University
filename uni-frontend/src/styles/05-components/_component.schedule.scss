@@ -26,3 +26,7 @@
     font-size: $font-size-sm;
     opacity: .7;
 }
+
+.#{$c}schedule__cell--border {
+    border-bottom: 1px solid #fff;
+}

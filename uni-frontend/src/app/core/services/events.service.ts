@@ -18,6 +18,7 @@ export class EventsService {
   }
 
   getPersonal(userId: string) {
+    console.log(userId)
     return this.httpClient.get<Event[]>(`http://localhost:3000/events/personal/${userId}`);
   }
 

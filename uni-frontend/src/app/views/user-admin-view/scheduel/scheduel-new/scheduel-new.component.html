@@ -14,7 +14,7 @@
     </div>
     <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="period">Period</label>
-        <select class="c-input" formControlName="period">
+        <select class="c-input" formControlName="period" (change)="onPeriodSelect()">
             <option *ngFor="let period of periods" [ngValue]="period">
               {{ period.start }} - {{ period.end }}
             </option>
@@ -22,7 +22,7 @@
     </div>
     <div class="u-flex-column u-half-width">
         <label class="c-input-label" for="classroom">Classroom</label>
-        <select class="c-input" formControlName="classroom">
+        <select class="c-input" formControlName="classroom" (change)="onClassroomSelect()">
             <option *ngFor="let classroom of classrooms" [ngValue]="classroom">
               {{ classroom.code }}
             </option>

@@ -73,6 +73,7 @@ export class AuthenticationService {
 
     this.roles = decodedToken.roles;
     this.id = decodedToken.id;
+    console.log(decodedToken)
     return this.router.navigateByUrl('');
   }
 

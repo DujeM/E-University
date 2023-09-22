@@ -80,7 +80,7 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
     this.periods.forEach((row, i) => {
       this.scheduel[i] = [];
       this.days.forEach((col, j) => {
-          this.scheduel[i][j] = null;
+          this.scheduel[i][j] = [];
       });
     });
   }
@@ -96,7 +96,7 @@ export class ScheduelListComponent implements OnInit, OnDestroy {
             new Date(e.startDate).getDay() === j + 1
           ) {
             if (this.checkDisplayedEvent(e)) {
-              this.scheduel[i][j] = e;
+              this.scheduel[i][j].push(e);
             }
           }
         });

@@ -34,6 +34,7 @@ export class ScheduelNewComponent implements OnInit, OnDestroy {
   allClassrooms: Classroom[] = [];
   classrooms: Classroom[] = [];
   courses: Course[] = [];
+  eventsByDay: Event[] = [];
 
   constructor(
     private fb: FormBuilder, 
@@ -106,23 +107,49 @@ export class ScheduelNewComponent implements OnInit, OnDestroy {
       .subscribe((res: Event[]) => {
         this.periods = this.allPeriods;
         this.classrooms = this.allClassrooms;
-
-        res.forEach((e: Event) => {
-            if (e.recurring && e.canceledDates && e.canceledDates.includes(this.startDate.value)) {
-              return;
-            }
-
-            if (!e.recurring && compareAsc(new Date(e.startDate), new Date(this.startDate.value)) !== 0) {
-              return
-            }
-
-            if (compareAsc(new Date(e.startDate), new Date(this.startDate.value)) === 1) {
-              return;
-            }
-
-            this.periods = this.periods.filter(p => p.id !== e.period.id);
-            this.classrooms = this.classrooms.filter(c => c.id !== e.classroom.id);
-        });
+        this.eventsByDay = res;
       });
+  }
+
+  onPeriodSelect() {
+    this.classrooms = this.allClassrooms;
+
+    this.eventsByDay.forEach(e => {
+      if (e.recurring && e.canceledDates && e.canceledDates.includes(this.startDate.value)) {
+        return;
+      }
+
+      if (!e.recurring && compareAsc(new Date(e.startDate), new Date(this.startDate.value)) !== 0) {
+        return
+      }
+
+      if (compareAsc(new Date(e.startDate), new Date(this.startDate.value)) === 1) {
+        return;
+      }
+      if (this.period.value.id === e.period.id) {
+        this.classrooms = this.classrooms.filter(c => c.id !== e.classroom.id);
+      }
+    });
+  }
+
+  onClassroomSelect() {
+    this.periods = this.allPeriods;
+
+    this.eventsByDay.forEach(e => {
+      if (e.recurring && e.canceledDates && e.canceledDates.includes(this.startDate.value)) {
+        return;
+      }
+
+      if (!e.recurring && compareAsc(new Date(e.startDate), new Date(this.startDate.value)) !== 0) {
+        return
+      }
+
+      if (compareAsc(new Date(e.startDate), new Date(this.startDate.value)) === 1) {
+        return;
+      }
+      if (this.classroom.value.id === e.classroom.id) {
+        this.periods = this.periods.filter(p => p.id !== e.period.id);
+      }
+    });
   }
 }
